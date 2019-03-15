@@ -14,11 +14,11 @@ export default class Marquee extends PureComponent {
     speed: PropTypes.number,
     /**
      * Delay until animation starts, in seconds.
-     * Defaults to 2 seconds.
+     * Defaults to three seconds.
      */
     delay: PropTypes.number,
     /**
-     * Margin between children, in pixels.
+     * Horizontal margin between children, in pixels.
      * Defaults to 10px.
      */
     childMargin: PropTypes.number,
@@ -31,28 +31,38 @@ export default class Marquee extends PureComponent {
 
   static defaultProps = {
     speed: 0.04,
-    delay: 2,
-    childMargin: 10,
+    delay: 3,
+    childMargin: 15,
     children: null,
   };
 
+  // Animation properties.
+  _animationState = {
+    stopped: false,
+  };
+
+  // Timing properties.
+  _timeState = {
+    last: null,
+  };
+
+  // Position properties.
+  _pos = {
+    x: null,
+  };
+
   // Wrapper object for element refs.
-  _refs = {};
+  _refs = {
+    container: null,
+    inner: null,
+  };
 
   constructor(props) {
     super(props);
+
     this._setContainerRef = this._setContainerRef.bind(this);
     this._setInnerRef = this._setInnerRef.bind(this);
     this._tick = this._tick.bind(this);
-    this._animationState = {
-      started: false,
-    };
-    this._timeState = {
-      last: null,
-    };
-    this._pos = {
-      x: null,
-    };
   }
 
   ///////////////////////
@@ -64,23 +74,18 @@ export default class Marquee extends PureComponent {
       delay,
     } = this.props;
 
-    setTimeout(() => {
-      this._animationState.started = true;
-      // We need to offset the initial position to the left by
-      // the width of a single child.
-      this._pos.x = -this._childWidth();
-      // Start animating!
-      this._requestAnimation();
-    }, delay * 1000);
+    this._pos.x = this._getInitialPosition();
+    this._refs.inner.style.transform = translateXCSS(this._pos.x);
+    setTimeout(() => this._requestAnimation(), delay * 1000);
   }
 
   componentWillUnmount() {
-    this._animationState.started = false;
+    this._animationState.stopped = false;
   }
 
-  //////////////////////
-  // Component method //
-  //////////////////////
+  ///////////////////////
+  // Component methods //
+  ///////////////////////
 
   _setContainerRef(ref) {
     this._refs.container = ref;
@@ -95,7 +100,7 @@ export default class Marquee extends PureComponent {
   }
 
   _tick(time) {
-    if (!this._animationState.started) {
+    if (this._animationState.stopped) {
       return;
     }
 
@@ -109,18 +114,23 @@ export default class Marquee extends PureComponent {
 
   _updatePosition(timeDiff) {
     const {
+      childMargin,
       speed,
     } = this.props;
 
-    // Do a step forward.
-    this._pos.x += timeDiff * speed;
-
-    const requiresWrap = this._pos.x > this._refs.container.clientWidth;
-    if (requiresWrap) {
-      this._pos.x = -this._childWidth();
-    }
-
+    const nextPos = this._pos.x + (timeDiff * speed);
+    this._pos.x = nextPos > -childMargin
+      ? this._getInitialPosition()
+      : nextPos;
     this._refs.inner.style.transform = translateXCSS(this._pos.x);
+  }
+
+  _getInitialPosition() {
+    const {
+      childMargin,
+    } = this.props;
+
+    return -this._childWidth() - childMargin;
   }
 
   _childWidth() {
