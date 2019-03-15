@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-export function translateXCSS(numPx) {
+function translateXCSS(numPx) {
   return `translateX(${numPx}px)`;
 }
 
@@ -70,13 +70,11 @@ export default class Marquee extends PureComponent {
   ///////////////////////
 
   componentDidMount() {
-    const {
-      delay,
-    } = this.props;
+    this._start();
+  }
 
-    this._pos.x = this._getInitialPosition();
-    this._refs.inner.style.transform = translateXCSS(this._pos.x);
-    setTimeout(() => this._requestAnimation(), delay);
+  componentDidUpdate() {
+    this._start();
   }
 
   componentWillUnmount() {
@@ -93,6 +91,18 @@ export default class Marquee extends PureComponent {
 
   _setInnerRef(ref) {
     this._refs.inner = ref;
+  }
+
+  _start() {
+    const {
+      delay,
+    } = this.props;
+
+    this._pos.x = this._getInitialPosition();
+    this._refs.inner.style.transform = translateXCSS(this._pos.x);
+
+    this._animationState.stopped = !this._childRequiresWrapping();
+    setTimeout(() => this._requestAnimation(), delay);
   }
 
   _requestAnimation() {
@@ -135,6 +145,10 @@ export default class Marquee extends PureComponent {
 
   _childWidth() {
     return this._refs.inner.clientWidth / 2;
+  }
+
+  _childRequiresWrapping() {
+    return this._childWidth() > this._refs.container.clientWidth;
   }
 
   ////////////////////
