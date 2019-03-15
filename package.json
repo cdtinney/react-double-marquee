@@ -1,0 +1,41 @@
+{
+  "name": "react-smoother-marquee",
+  "version": "0.1.0",
+  "description": "A smooth-scrolling React <marquee> component",
+  "main": "dist/bundle.js",
+  "scripts": {
+    "build": "rollup --config",
+    "lint": "eslint src/**",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "npm run build -- -w"
+  },
+  "keywords": [
+    "React",
+    "Marquee",
+    "Component"
+  ],
+  "author": "Colin Tinney (https://tinney.dev)",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.15.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "rollup": "^1.6.0",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-watch": "^4.3.1"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  }
+}
