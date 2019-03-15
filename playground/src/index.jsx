@@ -13,9 +13,16 @@ import Marquee from '../../dist/bundle.esm';
 
 function Index() {
   return (
-    <Marquee>
-      foo
-    </Marquee>
+    <div
+      style={{
+        width: '200px',
+        whiteSpace: 'nowrap',
+      }}
+    >
+      <Marquee>
+        foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo
+      </Marquee>
+    </div>
   );
 }
 

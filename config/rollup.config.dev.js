@@ -49,8 +49,6 @@ module.exports = {
       port: 8001,
       root: 'playground/public',
       file: 'playground/public/index.html',
-      // Wait half a second before reloading.
-      wait: 500,
     }),
   ],
 };
