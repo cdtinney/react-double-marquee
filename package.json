@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "description": "A smooth-scrolling React <marquee> component that loops content twice",
   "main": "dist/bundle.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "rollup --config",
     "lint": "eslint src/**",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "npm run build -- -w"
+    "watch": "npm run build -- -w",
+    "prepublishOnly": "npm run build && npm run lint"
   },
   "keywords": [
     "React",
