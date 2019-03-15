@@ -39,6 +39,13 @@ export default function FooComponent() {
 
 ### Props
 
+| Key | Type | Default | Description |
+| - | - | - | - |
+| `speed` | `Number` | 0.04 | Movement speed, in pixels/millisecond. |
+| `delay` | `Number` | 3000 | Time until animation begins, in milliseconds. |
+| `childMargin` | `Number` | 10 | Horizontal margin between children, in pixels. |
+| `children` | React node | Children to render within the marquee. | 
+
 ## Developing
 
 First, clone the repository.

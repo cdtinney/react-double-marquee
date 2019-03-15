@@ -13,7 +13,7 @@ export default class Marquee extends PureComponent {
      */
     speed: PropTypes.number,
     /**
-     * Delay until animation starts, in seconds.
+     * Delay until animation starts, in milliseconds.
      * Defaults to three seconds.
      */
     delay: PropTypes.number,
@@ -31,7 +31,7 @@ export default class Marquee extends PureComponent {
 
   static defaultProps = {
     speed: 0.04,
-    delay: 3,
+    delay: 3000,
     childMargin: 15,
     children: null,
   };
@@ -76,7 +76,7 @@ export default class Marquee extends PureComponent {
 
     this._pos.x = this._getInitialPosition();
     this._refs.inner.style.transform = translateXCSS(this._pos.x);
-    setTimeout(() => this._requestAnimation(), delay * 1000);
+    setTimeout(() => this._requestAnimation(), delay);
   }
 
   componentWillUnmount() {
