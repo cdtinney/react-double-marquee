@@ -39,11 +39,7 @@ export default class Marquee extends PureComponent {
   // Animation properties.
   _animationState = {
     stopped: true,
-  };
-
-  // Timing properties.
-  _timeState = {
-    last: null,
+    lastTickTime: null,
   };
 
   // Position properties.
@@ -112,8 +108,8 @@ export default class Marquee extends PureComponent {
   }
 
   _requestAnimationIfNeeded() {
-    const shouldAnimate = this._refs.inner.scrollWidth
-      > this._refs.container.clientWidth;
+    const shouldAnimate = (this._refs.container && this._refs.inner)
+      && this._refs.inner.scrollWidth > this._refs.container.clientWidth;
     if (!shouldAnimate) {
       this._animationState.stopped = false;
       return;
@@ -123,28 +119,25 @@ export default class Marquee extends PureComponent {
   }
 
   _tick(time) {
-    // Additionally, if children have become unmounted,
-    // stop the animation.
-    if (!this._refs.container || !this._refs.inner) {
-      this._animationState.stopped = true;
-      return;
+    const {
+      lastTickTime,
+    } = this._animationState;
+
+    if (lastTickTime) {
+      this._updateInnerPosition(time - lastTickTime);
     }
 
-    if (this._timeState.last !== null) {
-      this._updateInnerPosition(time - this._timeState.last);
-    }
-
-    this._timeState.last = time;
+    this._animationState.lastTickTime = time;
     this._requestAnimationIfNeeded();
   }
 
-  _updateInnerPosition(timeDiff) {
+  _updateInnerPosition(timeDelta) {
     const {
       childMargin,
       speed,
     } = this.props;
 
-    const nextPos = this._pos.x + (timeDiff * speed);
+    const nextPos = this._pos.x + (timeDelta * speed);
     this._pos.x = nextPos > -childMargin
       ? this._getInitialPosition()
       : nextPos;
