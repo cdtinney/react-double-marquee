@@ -102,7 +102,9 @@ export default class Marquee extends PureComponent {
     this._refs.inner.style.transform = translateXCSS(this._pos.x);
 
     this._animationState.stopped = !this._childRequiresWrapping();
-    setTimeout(() => this._requestAnimation(), delay);
+    if (!this._animationState.stopped) {
+      setTimeout(() => this._requestAnimation(), delay);
+    }
   }
 
   _requestAnimation() {
@@ -110,19 +112,22 @@ export default class Marquee extends PureComponent {
   }
 
   _tick(time) {
-    if (this._animationState.stopped) {
+    // If children have become unmounted,
+    // stop the animation.
+    if (!this._refs.container || !this._refs.inner) {
+      this._animationState.stopped = true;
       return;
     }
 
     if (this._timeState.last !== null) {
-      this._updatePosition(time - this._timeState.last);
+      this._updateInnerPosition(time - this._timeState.last);
     }
 
     this._timeState.last = time;
     this._requestAnimation();
   }
 
-  _updatePosition(timeDiff) {
+  _updateInnerPosition(timeDiff) {
     const {
       childMargin,
       speed,
