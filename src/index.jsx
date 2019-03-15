@@ -38,7 +38,7 @@ export default class Marquee extends PureComponent {
 
   // Animation properties.
   _animationState = {
-    stopped: false,
+    stopped: true,
   };
 
   // Timing properties.
@@ -70,11 +70,13 @@ export default class Marquee extends PureComponent {
   ///////////////////////
 
   componentDidMount() {
-    this._start();
+    this._resetPosition();
+    this._requestAnimationWithDelay();
   }
 
   componentDidUpdate() {
-    this._start();
+    this._resetPosition();
+    this._requestAnimationWithDelay();
   }
 
   componentWillUnmount() {
@@ -93,26 +95,35 @@ export default class Marquee extends PureComponent {
     this._refs.inner = ref;
   }
 
-  _start() {
+  _resetPosition() {
+    this._pos.x = this._getInitialPosition();
+    this._refs.inner.style.transform = translateXCSS(this._pos.x);
+  }
+
+  _requestAnimationWithDelay() {
     const {
       delay,
     } = this.props;
 
-    this._pos.x = this._getInitialPosition();
-    this._refs.inner.style.transform = translateXCSS(this._pos.x);
-
-    this._animationState.stopped = !this._childRequiresWrapping();
-    if (!this._animationState.stopped) {
-      setTimeout(() => this._requestAnimation(), delay);
-    }
+    setTimeout(
+      this._requestAnimationIfNeeded.bind(this),
+      delay,
+    );
   }
 
-  _requestAnimation() {
+  _requestAnimationIfNeeded() {
+    const shouldAnimate = this._refs.inner.scrollWidth
+      > this._refs.container.clientWidth;
+    if (!shouldAnimate) {
+      this._animationState.stopped = false;
+      return;
+    }
+
     window.requestAnimationFrame(this._tick);
   }
 
   _tick(time) {
-    // If children have become unmounted,
+    // Additionally, if children have become unmounted,
     // stop the animation.
     if (!this._refs.container || !this._refs.inner) {
       this._animationState.stopped = true;
@@ -124,7 +135,7 @@ export default class Marquee extends PureComponent {
     }
 
     this._timeState.last = time;
-    this._requestAnimation();
+    this._requestAnimationIfNeeded();
   }
 
   _updateInnerPosition(timeDiff) {
@@ -145,15 +156,7 @@ export default class Marquee extends PureComponent {
       childMargin,
     } = this.props;
 
-    return -this._childWidth() - childMargin;
-  }
-
-  _childWidth() {
-    return this._refs.inner.clientWidth / 2;
-  }
-
-  _childRequiresWrapping() {
-    return this._childWidth() > this._refs.container.clientWidth;
+    return -(this._refs.inner.clientWidth / 2) - childMargin;
   }
 
   ////////////////////
