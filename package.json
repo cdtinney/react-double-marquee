@@ -7,10 +7,11 @@
     "dist"
   ],
   "scripts": {
-    "build": "rollup --config",
+    "build": "rollup --config config/rollup.config.prod.js",
+    "build:watch": "npm run build -- --watch",
+    "dev": "rollup --config config/rollup.config.dev.js --watch",
     "lint": "eslint src/**",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "npm run build -- -w",
     "prepublishOnly": "npm run build && npm run lint"
   },
   "keywords": [
@@ -35,11 +36,18 @@
     "eslint-plugin-react": "^7.12.4",
     "rollup": "^1.6.0",
     "rollup-plugin-babel": "^4.3.2",
-    "rollup-watch": "^4.3.1"
+    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-live-server": "^1.0.1",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-replace": "^2.1.0"
   },
   "dependencies": {
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4"
   }
 }
