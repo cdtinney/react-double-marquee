@@ -1,6 +1,8 @@
 # react-double-marquee
 > A React marquee component that smoothly loops content.
 
+[![npm version](https://badge.fury.io/js/react-double-marquee.svg)](https://badge.fury.io/js/react-double-marquee)
+
 ![Example](https://raw.githubusercontent.com/cdtinney/react-double-marquee/master/docs/static/example.gif)
 
 ## Contents
