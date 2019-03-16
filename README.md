@@ -1,10 +1,13 @@
 # react-double-marquee
 > A React marquee component that smoothly loops content, twice.
 
+![Example](docs/static/example.gif)
+
 ## Contents
 
 - [Contents](#contents)
 - [Getting Started](#getting-started)
+  - [Demos](#demos)
   - [Usage](#usage)
   - [Props](#props)
 - [Developing](#developing)
@@ -15,6 +18,10 @@
 
 ## Getting Started
 
+### Demos
+
+Demos can be found [here](https://cdtinney.github.io/react-double-marquee/).
+
 ### Usage
 
 Install as a dependency:
@@ -23,16 +30,23 @@ Install as a dependency:
 $ npm install --save react-double-marquee
 ```
 
-Then, import it into your components:
+Then, import it and **wrap it in an element that does not display overflow**:
 
-```javascript
+```js
 import Marquee from 'react-double-marquee';
 
 export default function FooComponent() {
   return (
-    <Marquee>
-      {'Some really really really really really long text'}
-    </Marquee>
+    <div
+      style={{
+        width: '200px',
+        whiteSpace: 'nowrap',
+      }}
+    >
+      <Marquee>
+        Some really really really really really long text
+      </Marquee>
+    </div>
   );
 }
 ```
