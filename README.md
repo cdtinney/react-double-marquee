@@ -1,7 +1,7 @@
 # react-double-marquee
 > A React marquee component that smoothly loops content.
 
-![Example](docs/static/example.gif)
+![Example](https://raw.githubusercontent.com/cdtinney/react-double-marquee/master/docs/static/example.gif)
 
 ## Contents
 

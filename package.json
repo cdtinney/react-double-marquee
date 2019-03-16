@@ -4,8 +4,7 @@
   "description": "A smooth-scrolling React <marquee> component that loops content twice",
   "main": "dist/bundle.js",
   "files": [
-    "dist",
-    "docs/static/example.gif"
+    "dist"
   ],
   "scripts": {
     "build": "rollup --config config/rollup.config.prod.js",
