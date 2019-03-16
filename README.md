@@ -88,6 +88,18 @@ To build the bundle with live rebuilding:
 $ npm run watch
 ```
 
+To run the demos with live reload:
+
+```
+$ npm run dev
+```
+
+To build docs (for GitHub Pages):
+
+```
+$ npm run docs
+```
+
 ### Linting
 
 To run the linter:
