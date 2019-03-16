@@ -10,7 +10,6 @@
     "build": "rollup --config config/rollup.config.prod.js",
     "build:watch": "npm run build -- --watch",
     "dev": "rollup --config config/rollup.config.dev.js --watch",
-    "dev:all": "concurrently -k -n \"lib, server\" \"npm run build:watch\" \"npm run dev\"",
     "lint": "eslint src/**",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublishOnly": "npm run build && npm run lint"
@@ -43,7 +42,6 @@
     "rollup-plugin-replace": "^2.1.0"
   },
   "dependencies": {
-    "concurrently": "^4.1.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"

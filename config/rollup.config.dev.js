@@ -3,17 +3,37 @@ import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import replace from 'rollup-plugin-replace';
 import liveServer from 'rollup-plugin-live-server';
+import externals from './externals';
 
 const paths = {
-  input: 'playground/src/index.jsx',
-  outputFile: 'playground/public/static/index.js',
+  lib: {
+    input: 'src/index.jsx',
+    outputFile: 'playground/public/static/lib/index.js',
+  },
+  playground: {
+    input: 'playground/src/index.jsx',
+    outputFile: 'playground/public/static/index.js',
+  },
 };
 
-module.exports = {
-  input: paths.input,
+module.exports = [{
+  input: paths.lib.input,
+  external: externals.keys,
+  output: {
+    file: paths.lib.outputFile,
+    format: 'esm',
+    globals: externals.globals,
+  },
+  plugins: [
+    babel({
+      exclude: 'node_modules/**',
+    }),
+  ],
+}, {
+  input: paths.playground.input,
   output: {
     name: 'index',
-    file: paths.outputFile,
+    file: paths.playground.outputFile,
     format: 'umd',
   },
   plugins: [
@@ -49,6 +69,7 @@ module.exports = {
       port: 8001,
       root: 'playground/public',
       file: 'playground/public/index.html',
+      watch: 'playground/public',
     }),
   ],
-};
+}];

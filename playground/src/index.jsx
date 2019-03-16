@@ -9,7 +9,7 @@ import ReactDOM from 'react-dom';
 // Internal dependencies //
 ///////////////////////////
 
-import Marquee from '../../dist/bundle.esm';
+import Marquee from '../public/static/lib';
 
 function Index() {
   return (
@@ -20,7 +20,7 @@ function Index() {
       }}
     >
       <Marquee>
-        foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo
+        foo bar foo bar foo foo foo foo foo foo foo foo foo foo foo foo foo foo
       </Marquee>
     </div>
   );
