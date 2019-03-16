@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
-import Logo from '../../public/static/logo.png';
+import Logo from '../../../docs/static/logo.png';
 
 const styles = {
   header: {

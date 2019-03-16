@@ -1,5 +1,5 @@
 import React from 'react';
-import Marquee from '../../public/static/lib';
+import Marquee from '../../../docs/static/lib';
 import ExampleCard from '../components/ExampleCard';
 
 function DefaultMarquee() {

@@ -23,7 +23,6 @@ jspm_packages/
 
 # Builds
 dist
-playground/public/static
 
 # VS Code
 *.code-workspace
