@@ -3,30 +3,57 @@
 ///////////////////////////
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import injectSheet from 'react-jss';
 
 ///////////////////////////
 // Internal dependencies //
 ///////////////////////////
 
-import Marquee from '../public/static/lib';
+import Header from './components/Header';
+import DefaultMarquee from './examples/DefaultMarquee';
 
-function Index() {
+import './styles.css';
+
+const styles = {
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    height: '100%',
+    fontFamily: 'roboto, sans-serif',
+    boxSizing: 'border-box',
+    backgroundColor: '#EFEFEF',
+  },
+  examples: {
+    padding: '20px 15px',
+    borderTop: '1px solid rgba(221, 221, 221)',
+  },
+};
+
+function Index({
+  classes,
+}) {
   return (
-    <div
-      style={{
-        width: '200px',
-        whiteSpace: 'nowrap',
-      }}
-    >
-      <Marquee>
-        foo bar foo bar foo foo foo foo foo foo foo foo foo foo foo foo foo foo
-      </Marquee>
+    <div className={classes.root}>
+      <Header />
+      <div className={classes.examples}>
+        <DefaultMarquee />
+      </div>
     </div>
   );
 }
 
+Index.propTypes = {
+  classes: PropTypes.shape({
+    root: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+const ComponentWithStyles = injectSheet(styles)(Index);
+
 ReactDOM.render(
-  <Index />,
+  <ComponentWithStyles />,
   document.getElementById('root'),
 );

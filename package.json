@@ -27,6 +27,7 @@
     "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
+    "@timdp/rollup-plugin-image": "^1.0.3",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.15.1",
     "eslint-config-airbnb": "^17.1.0",
@@ -39,12 +40,14 @@
     "rollup-plugin-commonjs": "^9.2.1",
     "rollup-plugin-live-server": "^1.0.1",
     "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-replace": "^2.1.0"
   },
   "dependencies": {
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "react-jss": "^8.6.1"
   },
   "peerDependencies": {
     "prop-types": "^15.7.2",
