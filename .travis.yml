@@ -9,4 +9,5 @@ jobs:
       node_js: lts/*
       skip_cleanup: true
       script:
-        - npm run semantic-release
+        # Skip script until version 1.0.0
+        # - npm run semantic-release
