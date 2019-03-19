@@ -17,7 +17,7 @@
     "release:verify": "npm run build && npm run lint && npm run docs && npm run release",
     "test": "jest",
     "test:coverage": "npm run test -- --coverage",
-    "test:coveralls": "npm run test:coverage && coveralls",
+    "test:coveralls": "npm run test:coverage && cat coverage/lcov.info | coveralls",
     "test:watch": "npm run test -- --watch"
   },
   "keywords": [
