@@ -4,6 +4,7 @@ import babel from 'rollup-plugin-babel';
 import replace from 'rollup-plugin-replace';
 import postcss from 'rollup-plugin-postcss';
 import image from '@timdp/rollup-plugin-image';
+import json from 'rollup-plugin-json';
 import externals from './externals';
 
 const paths = {
@@ -39,6 +40,7 @@ module.exports = [{
   },
   plugins: [
     image(),
+    json(),
     postcss({
       plugins: [],
     }),

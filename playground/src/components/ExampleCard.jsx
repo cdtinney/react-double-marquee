@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import JSONPretty from 'react-json-pretty';
+import JSONPrettyAcai from 'react-json-pretty/dist/acai';
 import injectSheet from 'react-jss';
 
 const styles = {
@@ -7,19 +9,21 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     alignItems: 'center',
-    border: '1px solid rgba(221, 221, 221)',
   },
   description: {
-    width: '100px',
-    padding: '20px',
+    width: '250px',
+    padding: '10px 15px',
     color: '#DDDDDD',
     backgroundColor: '#4A5A6A',
+    boxShadow: '3px 3px 6px rgba(45, 45, 90, 0.35)',
   },
   marqueeOuter: {
     width: '250px',
+    margin: '15px',
     flexGrow: 1,
     backgroundColor: '#CCCCCC',
     borderRadius: '2px',
+    boxShadow: '3px 3px 6px rgba(45, 45, 90, 0.35)',
   },
   marqueeInner: {
     width: '200px',
@@ -36,7 +40,25 @@ function ExampleCard({
   return (
     <div className={classes.root}>
       <div className={classes.description}>
-        {description}
+        <div>
+          {description}
+        </div>
+        <div className={classes.props}>
+          <JSONPretty
+            data={{
+              // Wrap it so that it's obvious to readers that
+              // they are props.
+              props: marqueeComponent.props,
+            }}
+            theme={{
+              ...JSONPrettyAcai,
+              main: `padding: 8px; ${JSONPrettyAcai.main}`,
+              // Ensures that words are broken and wrapped as necessary
+              // to fit the parent element.
+              string: 'word-break: break-all; white-space: normal',
+            }}
+          />
+        </div>
       </div>
       <div className={classes.marqueeOuter}>
         <div className={classes.marqueeInner}>
