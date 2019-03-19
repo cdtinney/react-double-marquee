@@ -29,3 +29,9 @@ dist
 
 # MacOS
 .DS_Store
+
+# Test coverage output
+coverage
+
+# Coveralls config only required locally
+.coveralls.yml

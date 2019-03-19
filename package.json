@@ -12,10 +12,12 @@
     "cz": "git-cz",
     "dev": "rollup --config config/rollup.config.dev.js --watch",
     "docs": "rollup --config config/rollup.config.docs.js",
-    "lint": "eslint src/**",
+    "lint": "eslint \"src/**\"",
     "release": "semantic-release",
     "release:verify": "npm run build && npm run lint && npm run docs && npm run release",
     "test": "jest",
+    "test:coverage": "npm run test -- --coverage",
+    "test:coveralls": "npm run test:coverage && coveralls",
     "test:watch": "npm run test -- --watch"
   },
   "keywords": [
@@ -39,6 +41,7 @@
     "@timdp/rollup-plugin-image": "^1.0.3",
     "babel-eslint": "^10.0.1",
     "commitizen": "^3.0.7",
+    "coveralls": "^3.0.3",
     "cz-conventional-changelog": "^2.1.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
