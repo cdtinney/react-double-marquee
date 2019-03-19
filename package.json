@@ -12,7 +12,6 @@
     "dev": "rollup --config config/rollup.config.dev.js --watch",
     "docs": "rollup --config config/rollup.config.docs.js",
     "lint": "eslint src/**",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "prepublishOnly": "npm run build && npm run lint"
   },
   "keywords": [
