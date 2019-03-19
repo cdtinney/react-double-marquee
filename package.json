@@ -9,10 +9,12 @@
   "scripts": {
     "build": "rollup --config config/rollup.config.prod.js",
     "build:watch": "npm run build -- --watch",
+    "cz": "git-cz",
     "dev": "rollup --config config/rollup.config.dev.js --watch",
     "docs": "rollup --config config/rollup.config.docs.js",
     "lint": "eslint src/**",
-    "prepublishOnly": "npm run build && npm run lint"
+    "prepublishOnly": "npm run build && npm run lint",
+    "semantic-release": "semantic-release"
   },
   "keywords": [
     "React",
@@ -29,6 +31,8 @@
     "@babel/preset-react": "^7.0.0",
     "@timdp/rollup-plugin-image": "^1.0.3",
     "babel-eslint": "^10.0.1",
+    "commitizen": "^3.0.7",
+    "cz-conventional-changelog": "^2.1.0",
     "eslint": "^5.15.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-babel": "^5.3.0",
@@ -53,5 +57,10 @@
   "peerDependencies": {
     "prop-types": "^15.7.2",
     "react": "^16.8.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
