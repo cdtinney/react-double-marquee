@@ -5,7 +5,7 @@ module.exports = {
     '@semantic-release/changelog',
     ['@semantic-release/npm', {
       npmPublish: true,
-      pkgRoot: 'dist',
+      pkgRoot: '.',
       tarball: false,
     }],
     ['@semantic-release/git', {

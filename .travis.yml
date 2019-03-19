@@ -15,4 +15,4 @@ jobs:
       skip_cleanup: true
       script:
         # Skip script until version 1.0.0
-        # - npm run semantic-release
+        # - npm run release
