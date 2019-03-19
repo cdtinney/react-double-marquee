@@ -2,6 +2,8 @@
 > A React marquee component that smoothly loops content.
 
 [![npm version](https://badge.fury.io/js/react-double-marquee.svg)](https://badge.fury.io/js/react-double-marquee)
+[![Build Status](https://travis-ci.org/cdtinney/react-double-marquee.svg?branch=master)](https://travis-ci.org/cdtinney/react-double-marquee)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 ![Example](https://raw.githubusercontent.com/cdtinney/react-double-marquee/master/docs/static/example.gif)
 
