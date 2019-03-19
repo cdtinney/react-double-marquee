@@ -75,10 +75,6 @@ export default class Marquee extends PureComponent {
     this._requestAnimationWithDelay();
   }
 
-  componentWillUnmount() {
-    this._animationState.stopped = false;
-  }
-
   ///////////////////////
   // Component methods //
   ///////////////////////
@@ -111,7 +107,6 @@ export default class Marquee extends PureComponent {
     const shouldAnimate = (this._refs.container && this._refs.inner)
       && this._refs.inner.scrollWidth > this._refs.container.clientWidth;
     if (!shouldAnimate) {
-      this._animationState.stopped = false;
       return;
     }
 

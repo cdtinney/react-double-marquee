@@ -30716,11 +30716,6 @@
 	      this._resetPosition();
 
 	      this._requestAnimationWithDelay();
-	    }
-	  }, {
-	    key: "componentWillUnmount",
-	    value: function componentWillUnmount() {
-	      this._animationState.stopped = false;
 	    } ///////////////////////
 	    // Component methods //
 	    ///////////////////////
@@ -30753,7 +30748,6 @@
 	      var shouldAnimate = this._refs.container && this._refs.inner && this._refs.inner.scrollWidth > this._refs.container.clientWidth;
 
 	      if (!shouldAnimate) {
-	        this._animationState.stopped = false;
 	        return;
 	      }
 

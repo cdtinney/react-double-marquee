@@ -6,7 +6,11 @@
 [![Coverage Status](https://coveralls.io/repos/github/cdtinney/react-double-marquee/badge.svg?branch=master)](https://coveralls.io/github/cdtinney/react-double-marquee?branch=master)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
+Lo-fi example:
+
 ![Example](https://raw.githubusercontent.com/cdtinney/react-double-marquee/master/docs/static/example.gif)
+
+View the [demos page](https://cdtinney.github.io/react-double-marquee/) for live examples.
 
 ## Contents
 
