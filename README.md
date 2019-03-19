@@ -19,6 +19,7 @@
   - [Building](#building)
   - [Testing](#testing)
   - [Linting](#linting)
+  - [Releasing](#releasing)
 - [License](#license)
 
 ## Getting Started
@@ -97,7 +98,9 @@ To run the demos with live reload:
 $ npm run dev
 ```
 
-To build docs (for GitHub Pages):
+Then, open `http://localhost:8001` to view the demo docs.
+
+To build the static docs website (e.g. for GitHub Pages):
 
 ```
 $ npm run docs
@@ -108,7 +111,7 @@ $ npm run docs
 To run tests:
 
 ```
-$ npm run tet
+$ npm run test
 ```
 
 To run tests in watch mode:
@@ -117,12 +120,35 @@ To run tests in watch mode:
 $ npm run test:watch
 ```
 
+To run tests with coverage reporting:
+
+```
+$ npm run test:coverage
+```
+
 ### Linting
 
 To run the linter:
 
 ```
 $ npm run lint
+```
+
+### Releasing
+
+Releases are done automatically via Travis CI and [`semantic-release`](https://github.com/semantic-release/semantic-release)
+from the `master` branch.
+
+To verify the repos for release:
+
+```
+$ npm run release:verify
+```
+
+To run the release script as a dry-run:
+
+```
+$ npm run release
 ```
 
 ## License
