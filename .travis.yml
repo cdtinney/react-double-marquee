@@ -2,13 +2,13 @@ language: node_js
 node_js:
   - lts/*
 
-script:
-  - npm run build
-  - npm run lint
-  - npm run docs
-
 jobs:
   include:
+    - stage: script
+      script:
+        - npm run build
+        - npm run lint
+        - npm run docs
     - stage: release
       if: branch = master
       node_js: lts/*
