@@ -14,7 +14,9 @@
     "docs": "rollup --config config/rollup.config.docs.js",
     "lint": "eslint src/**",
     "release": "semantic-release",
-    "release:verify": "npm run build && npm run lint && npm run docs && npm run release"
+    "release:verify": "npm run build && npm run lint && npm run docs && npm run release",
+    "test": "jest",
+    "test:watch": "npm run test -- --watch"
   },
   "keywords": [
     "React",
@@ -38,12 +40,15 @@
     "babel-eslint": "^10.0.1",
     "commitizen": "^3.0.7",
     "cz-conventional-changelog": "^2.1.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
     "eslint": "^5.15.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
+    "jest": "^24.5.0",
     "rollup": "^1.6.0",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.2.1",
@@ -67,5 +72,10 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/setupTests.js"
+    ]
   }
 }

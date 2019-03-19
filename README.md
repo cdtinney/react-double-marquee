@@ -17,6 +17,7 @@
 - [Developing](#developing)
   - [Installing](#installing)
   - [Building](#building)
+  - [Testing](#testing)
   - [Linting](#linting)
 - [License](#license)
 
@@ -100,6 +101,20 @@ To build docs (for GitHub Pages):
 
 ```
 $ npm run docs
+```
+
+### Testing
+
+To run tests:
+
+```
+$ npm run tet
+```
+
+To run tests in watch mode:
+
+```
+$ npm run test:watch
 ```
 
 ### Linting
