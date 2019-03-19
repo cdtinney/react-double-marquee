@@ -8,11 +8,11 @@ script:
   - npm run docs
 
 deploy:
-  on:
-    branch: master
-    node: node
   provider: script
   skip_cleanup: true
   script:
     # Skip script until version 1.0.0
-    # - npm run release
+    #- npm run release
+    - echo "placeholder deploy"
+  on:
+    branch: master
