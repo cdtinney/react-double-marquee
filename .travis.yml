@@ -10,7 +10,7 @@ script:
 deploy:
   on:
     branch: master
-    node: lts/*
+    node: 'lts/*'
   provider: script
   skip_cleanup: true
   script:
