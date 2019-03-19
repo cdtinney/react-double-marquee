@@ -2,17 +2,16 @@ language: node_js
 node_js:
   - lts/*
 
-jobs:
-  include:
-    - stage: script
-      script:
-        - npm run build
-        - npm run lint
-        - npm run docs
-    - stage: release
-      if: branch = master
-      node_js: lts/*
-      skip_cleanup: true
-      script:
-        # Skip script until version 1.0.0
-        # - npm run release
+script:
+  - npm run build
+  - npm run lint
+  - npm run docs
+
+deploy:
+  on:
+    branch: master
+  provider: script
+  skip_cleanup: true
+  script:
+    # Skip script until version 1.0.0
+    # - npm run release
