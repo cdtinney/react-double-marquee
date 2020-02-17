@@ -2,10 +2,10 @@ import React from 'react';
 import Marquee from '../../../docs/static/lib';
 import ExampleCard from '../components/ExampleCard';
 
-function DefaultMarquee() {
+function DefaultRightMarquee() {
   return (
     <ExampleCard
-      description="Default"
+      description="Default - Right"
       marqueeComponent={(
         <Marquee>
           This is a very long and boring sentence with no meaning whatsoever
@@ -15,4 +15,4 @@ function DefaultMarquee() {
   );
 }
 
-export default DefaultMarquee;
+export default DefaultRightMarquee;

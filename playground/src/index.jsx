@@ -12,7 +12,8 @@ import injectSheet from 'react-jss';
 ///////////////////////////
 
 import Header from './components/Header';
-import DefaultMarquee from './examples/DefaultMarquee';
+import DefaultRightMarquee from './examples/DefaultRightMarquee';
+import DefaultLeftMarquee from './examples/DefaultLeftMarquee';
 
 import './styles.css';
 
@@ -39,7 +40,8 @@ function Index({
     <div className={classes.root}>
       <Header />
       <div className={classes.examples}>
-        <DefaultMarquee />
+        <DefaultRightMarquee />
+        <DefaultLeftMarquee />
       </div>
     </div>
   );

@@ -193,18 +193,38 @@ function (_PureComponent) {
   }, {
     key: "_updateInnerPosition",
     value: function _updateInnerPosition(timeDelta) {
+      var _this2 = this;
+
       var _this$props = this.props,
-          childMargin = _this$props.childMargin,
-          speed = _this$props.speed;
-      var nextPos = this._pos.x + timeDelta * speed;
-      this._pos.x = nextPos > -childMargin ? this._getInitialPosition() : nextPos;
-      this._refs.inner.style.transform = translateXCSS(this._pos.x);
+          direction = _this$props.direction,
+          speed = _this$props.speed,
+          childMargin = _this$props.childMargin;
+
+      var nextPosX = function () {
+        if (direction === 'right') {
+          var nextPos = _this2._pos.x + timeDelta * speed;
+          return nextPos > -childMargin ? _this2._getInitialPosition() : nextPos;
+        }
+
+        if (direction === 'left') {
+          var _nextPos = _this2._pos.x - timeDelta * speed;
+
+          return _nextPos < -(_this2._refs.inner.clientWidth / 2) - childMargin ? _this2._getInitialPosition() : _nextPos;
+        }
+
+        return _this2._pos.x;
+      }();
+
+      this._pos.x = nextPosX;
+      this._refs.inner.style.transform = translateXCSS(nextPosX);
     }
   }, {
     key: "_getInitialPosition",
     value: function _getInitialPosition() {
-      var childMargin = this.props.childMargin;
-      return -(this._refs.inner.clientWidth / 2) - childMargin;
+      var _this$props2 = this.props,
+          direction = _this$props2.direction,
+          childMargin = _this$props2.childMargin;
+      return direction === 'right' ? -(this._refs.inner.clientWidth / 2) - childMargin : -childMargin;
     } ////////////////////
     // Render methods //
     ////////////////////
@@ -212,9 +232,9 @@ function (_PureComponent) {
   }, {
     key: "render",
     value: function render() {
-      var _this$props2 = this.props,
-          childMargin = _this$props2.childMargin,
-          children = _this$props2.children;
+      var _this$props3 = this.props,
+          childMargin = _this$props3.childMargin,
+          children = _this$props3.children;
 
       var Child = function Child() {
         return React.createElement("span", {
@@ -249,6 +269,12 @@ _defineProperty(Marquee, "propTypes", {
   speed: PropTypes.number,
 
   /**
+   * Direction of movement; either 'left' or 'right'.
+   * Defaults to 'right'.
+   */
+  direction: PropTypes.oneOf(['left', 'right']),
+
+  /**
    * Delay until animation starts, in milliseconds.
    * Defaults to three seconds.
    */
@@ -270,6 +296,7 @@ _defineProperty(Marquee, "propTypes", {
 _defineProperty(Marquee, "defaultProps", {
   speed: 0.04,
   delay: 3000,
+  direction: 'right',
   childMargin: 15,
   children: null
 });
