@@ -13,6 +13,11 @@ export default class Marquee extends PureComponent {
      */
     speed: PropTypes.number,
     /**
+     * Direction of movement; either 'left' or 'right'.
+     * Defaults to 'right'.
+     */
+    direction: PropTypes.oneOf(['left', 'right']),
+    /**
      * Delay until animation starts, in milliseconds.
      * Defaults to three seconds.
      */
@@ -32,6 +37,7 @@ export default class Marquee extends PureComponent {
   static defaultProps = {
     speed: 0.04,
     delay: 3000,
+    direction: 'right',
     childMargin: 15,
     children: null,
   };
@@ -93,18 +99,14 @@ export default class Marquee extends PureComponent {
   }
 
   _requestAnimationWithDelay() {
-    const {
-      delay,
-    } = this.props;
+    const { delay } = this.props;
 
-    setTimeout(
-      this._requestAnimationIfNeeded.bind(this),
-      delay,
-    );
+    setTimeout(this._requestAnimationIfNeeded.bind(this), delay);
   }
 
   _requestAnimationIfNeeded() {
-    const shouldAnimate = (this._refs.container && this._refs.inner)
+    const shouldAnimate = this._refs.container
+      && this._refs.inner
       && this._refs.inner.scrollWidth > this._refs.container.clientWidth;
     if (!shouldAnimate) {
       return;
@@ -114,9 +116,7 @@ export default class Marquee extends PureComponent {
   }
 
   _tick(time) {
-    const {
-      lastTickTime,
-    } = this._animationState;
+    const { lastTickTime } = this._animationState;
 
     if (lastTickTime) {
       this._updateInnerPosition(time - lastTickTime);
@@ -127,24 +127,32 @@ export default class Marquee extends PureComponent {
   }
 
   _updateInnerPosition(timeDelta) {
-    const {
-      childMargin,
-      speed,
-    } = this.props;
+    const { direction, speed, childMargin } = this.props;
 
-    const nextPos = this._pos.x + (timeDelta * speed);
-    this._pos.x = nextPos > -childMargin
-      ? this._getInitialPosition()
-      : nextPos;
-    this._refs.inner.style.transform = translateXCSS(this._pos.x);
+    const nextPosX = (() => {
+      if (direction === 'right') {
+        const nextPos = this._pos.x + timeDelta * speed;
+        return nextPos > -childMargin ? this._getInitialPosition() : nextPos;
+      } if (direction === 'left') {
+        const nextPos = this._pos.x - timeDelta * speed;
+        return nextPos < (-(this._refs.inner.clientWidth / 2) - childMargin)
+          ? this._getInitialPosition()
+          : nextPos;
+      }
+
+      return this._pos.x;
+    })();
+
+    this._pos.x = nextPosX;
+    this._refs.inner.style.transform = translateXCSS(nextPosX);
   }
 
   _getInitialPosition() {
-    const {
-      childMargin,
-    } = this.props;
+    const { direction, childMargin } = this.props;
 
-    return -(this._refs.inner.clientWidth / 2) - childMargin;
+    return direction === 'right'
+      ? -(this._refs.inner.clientWidth / 2) - childMargin
+      : -childMargin;
   }
 
   ////////////////////
@@ -152,10 +160,7 @@ export default class Marquee extends PureComponent {
   ////////////////////
 
   render() {
-    const {
-      childMargin,
-      children,
-    } = this.props;
+    const { childMargin, children } = this.props;
 
     const Child = () => (
       <span
