@@ -12,8 +12,6 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-    # Skip script until version 1.0.0
-    #- npm run release
-    - echo "placeholder deploy"
+    - npm run release
   on:
     branch: master
