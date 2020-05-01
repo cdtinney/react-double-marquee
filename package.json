@@ -1,6 +1,6 @@
 {
   "name": "react-double-marquee",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A smooth-scrolling React <marquee> component that loops content.",
   "main": "dist/bundle.js",
   "files": [
