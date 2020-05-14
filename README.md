@@ -67,9 +67,9 @@ export default function FooComponent() {
 | ------------- | ----------------- | -------------------------------------- | ---------------------------------------------- |
 | `speed`       | `Number`          | 0.04                                   | Movement speed, in pixels/millisecond.         |
 | `delay`       | `Number`          | 3000                                   | Time until animation begins, in milliseconds.  |
-| `direction`   | `"right"||"left"` | `"right"`                              | Horizontal direction.                          |
+| `direction`   | `String` (`"right"||"left"`) | `"right"`                              | Horizontal direction.                          |
 | `childMargin` | `Number`          | 10                                     | Horizontal margin between children, in pixels. |
-| `children`    | React node        | Children to render within the marquee. |
+| `children`    | React node        | None | Children to render within the marquee. |
 
 ## Developing
 
