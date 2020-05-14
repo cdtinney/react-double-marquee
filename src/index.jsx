@@ -6,6 +6,23 @@ function translateXCSS(numPx) {
 }
 
 export default class Marquee extends PureComponent {
+  // Animation properties.
+  _animationState = {
+    stopped: true,
+    lastTickTime: null,
+  };
+
+  // Position properties.
+  _pos = {
+    x: null,
+  };
+
+  // Wrapper object for element refs.
+  _refs = {
+    container: null,
+    inner: null,
+  };
+
   static propTypes = {
     /**
      * Animation speed, in pixels per milliseconds.
@@ -40,23 +57,6 @@ export default class Marquee extends PureComponent {
     direction: 'right',
     childMargin: 15,
     children: null,
-  };
-
-  // Animation properties.
-  _animationState = {
-    stopped: true,
-    lastTickTime: null,
-  };
-
-  // Position properties.
-  _pos = {
-    x: null,
-  };
-
-  // Wrapper object for element refs.
-  _refs = {
-    container: null,
-    inner: null,
   };
 
   constructor(props) {
