@@ -8,7 +8,7 @@ function translateXCSS(numPx) {
 export default class Marquee extends PureComponent {
   // Animation properties.
   _animationState = {
-    stopped: true,
+    lastRequestId: null,
     lastTickTime: null,
   };
 
@@ -81,6 +81,10 @@ export default class Marquee extends PureComponent {
     this._requestAnimationWithDelay();
   }
 
+  componentWillUnmount() {
+    window.cancelAnimationFrame(this._animationState.lastRequestId);
+  }
+
   ///////////////////////
   // Component methods //
   ///////////////////////
@@ -112,7 +116,7 @@ export default class Marquee extends PureComponent {
       return;
     }
 
-    window.requestAnimationFrame(this._tick);
+    this._animationState.lastRequestId = window.requestAnimationFrame(this._tick);
   }
 
   _tick(time) {
