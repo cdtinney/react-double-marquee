@@ -232,6 +232,10 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
           speed = _this$props.speed,
           childMargin = _this$props.childMargin;
 
+      if (!this._refs.inner) {
+        return;
+      }
+
       var nextPosX = function () {
         if (direction === 'right') {
           var nextPos = _this2._pos.x + timeDelta * speed;
@@ -256,6 +260,11 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
       var _this$props2 = this.props,
           direction = _this$props2.direction,
           childMargin = _this$props2.childMargin;
+
+      if (!this._refs.inner) {
+        return 0;
+      }
+
       return direction === 'right' ? -(this._refs.inner.clientWidth / 2) - childMargin : -childMargin;
     } ////////////////////
     // Render methods //
