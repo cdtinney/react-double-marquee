@@ -69,6 +69,19 @@ function _setPrototypeOf(o, p) {
   return _setPrototypeOf(o, p);
 }
 
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 function _assertThisInitialized(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -85,14 +98,33 @@ function _possibleConstructorReturn(self, call) {
   return _assertThisInitialized(self);
 }
 
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+  return function () {
+    var Super = _getPrototypeOf(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn(this, result);
+  };
+}
+
 function translateXCSS(numPx) {
   return "translateX(".concat(numPx, "px)");
 }
 
-var Marquee =
-/*#__PURE__*/
-function (_PureComponent) {
+var Marquee = /*#__PURE__*/function (_PureComponent) {
   _inherits(Marquee, _PureComponent);
+
+  var _super = _createSuper(Marquee);
 
   // Animation properties.
   // Position properties.
@@ -102,7 +134,7 @@ function (_PureComponent) {
 
     _classCallCheck(this, Marquee);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Marquee).call(this, props));
+    _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "_animationState", {
       stopped: true,
@@ -237,24 +269,24 @@ function (_PureComponent) {
           children = _this$props3.children;
 
       var Child = function Child() {
-        return React.createElement("span", {
+        return /*#__PURE__*/React.createElement("span", {
           style: {
             margin: "0 ".concat(childMargin, "px")
           }
         }, children);
       };
 
-      return React.createElement("div", {
+      return /*#__PURE__*/React.createElement("div", {
         ref: this._setContainerRef,
         style: {
           overflowX: 'hidden'
         }
-      }, React.createElement("div", {
+      }, /*#__PURE__*/React.createElement("div", {
         ref: this._setInnerRef,
         style: {
           display: 'inline-block'
         }
-      }, React.createElement(Child, null), React.createElement(Child, null)));
+      }, /*#__PURE__*/React.createElement(Child, null), /*#__PURE__*/React.createElement(Child, null)));
     }
   }]);
 

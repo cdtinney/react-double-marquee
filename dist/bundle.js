@@ -2,10 +2,10 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react'), require('prop-types')) :
   typeof define === 'function' && define.amd ? define(['react', 'prop-types'], factory) :
   (global = global || self, global.Marquee = factory(global.React, global.PropTypes));
-}(this, function (React, PropTypes) { 'use strict';
+}(this, (function (React, PropTypes) { 'use strict';
 
   var React__default = 'default' in React ? React['default'] : React;
-  PropTypes = PropTypes && PropTypes.hasOwnProperty('default') ? PropTypes['default'] : PropTypes;
+  PropTypes = PropTypes && Object.prototype.hasOwnProperty.call(PropTypes, 'default') ? PropTypes['default'] : PropTypes;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -75,6 +75,19 @@
     return _setPrototypeOf(o, p);
   }
 
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+
+    try {
+      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -91,14 +104,33 @@
     return _assertThisInitialized(self);
   }
 
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+    return function () {
+      var Super = _getPrototypeOf(Derived),
+          result;
+
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+
+      return _possibleConstructorReturn(this, result);
+    };
+  }
+
   function translateXCSS(numPx) {
     return "translateX(".concat(numPx, "px)");
   }
 
-  var Marquee =
-  /*#__PURE__*/
-  function (_PureComponent) {
+  var Marquee = /*#__PURE__*/function (_PureComponent) {
     _inherits(Marquee, _PureComponent);
+
+    var _super = _createSuper(Marquee);
 
     // Animation properties.
     // Position properties.
@@ -108,7 +140,7 @@
 
       _classCallCheck(this, Marquee);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Marquee).call(this, props));
+      _this = _super.call(this, props);
 
       _defineProperty(_assertThisInitialized(_this), "_animationState", {
         stopped: true,
@@ -243,24 +275,24 @@
             children = _this$props3.children;
 
         var Child = function Child() {
-          return React__default.createElement("span", {
+          return /*#__PURE__*/React__default.createElement("span", {
             style: {
               margin: "0 ".concat(childMargin, "px")
             }
           }, children);
         };
 
-        return React__default.createElement("div", {
+        return /*#__PURE__*/React__default.createElement("div", {
           ref: this._setContainerRef,
           style: {
             overflowX: 'hidden'
           }
-        }, React__default.createElement("div", {
+        }, /*#__PURE__*/React__default.createElement("div", {
           ref: this._setInnerRef,
           style: {
             display: 'inline-block'
           }
-        }, React__default.createElement(Child, null), React__default.createElement(Child, null)));
+        }, /*#__PURE__*/React__default.createElement(Child, null), /*#__PURE__*/React__default.createElement(Child, null)));
       }
     }]);
 
@@ -309,4 +341,4 @@
 
   return Marquee;
 
-}));
+})));
