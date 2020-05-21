@@ -143,7 +143,7 @@
       _this = _super.call(this, props);
 
       _defineProperty(_assertThisInitialized(_this), "_animationState", {
-        stopped: true,
+        lastRequestId: null,
         lastTickTime: null
       });
 
@@ -178,6 +178,11 @@
         this._resetPosition();
 
         this._requestAnimationWithDelay();
+      }
+    }, {
+      key: "componentWillUnmount",
+      value: function componentWillUnmount() {
+        window.cancelAnimationFrame(this._animationState.lastRequestId);
       } ///////////////////////
       // Component methods //
       ///////////////////////
@@ -213,7 +218,7 @@
           return;
         }
 
-        window.requestAnimationFrame(this._tick);
+        this._animationState.lastRequestId = window.requestAnimationFrame(this._tick);
       }
     }, {
       key: "_tick",

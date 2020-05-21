@@ -137,7 +137,7 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
     _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "_animationState", {
-      stopped: true,
+      lastRequestId: null,
       lastTickTime: null
     });
 
@@ -172,6 +172,11 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
       this._resetPosition();
 
       this._requestAnimationWithDelay();
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      window.cancelAnimationFrame(this._animationState.lastRequestId);
     } ///////////////////////
     // Component methods //
     ///////////////////////
@@ -207,7 +212,7 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
         return;
       }
 
-      window.requestAnimationFrame(this._tick);
+      this._animationState.lastRequestId = window.requestAnimationFrame(this._tick);
     }
   }, {
     key: "_tick",

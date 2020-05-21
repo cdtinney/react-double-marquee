@@ -137,7 +137,7 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
     _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "_animationState", {
-      stopped: true,
+      lastRequestId: null,
       lastTickTime: null
     });
 
@@ -172,6 +172,11 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
       this._resetPosition();
 
       this._requestAnimationWithDelay();
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      window.cancelAnimationFrame(this._animationState.lastRequestId);
     } ///////////////////////
     // Component methods //
     ///////////////////////
@@ -207,7 +212,7 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
         return;
       }
 
-      window.requestAnimationFrame(this._tick);
+      this._animationState.lastRequestId = window.requestAnimationFrame(this._tick);
     }
   }, {
     key: "_tick",
@@ -231,10 +236,6 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
           direction = _this$props.direction,
           speed = _this$props.speed,
           childMargin = _this$props.childMargin;
-
-      if (!this._refs.inner) {
-        return;
-      }
 
       var nextPosX = function () {
         if (direction === 'right') {
@@ -260,11 +261,6 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
       var _this$props2 = this.props,
           direction = _this$props2.direction,
           childMargin = _this$props2.childMargin;
-
-      if (!this._refs.inner) {
-        return 0;
-      }
-
       return direction === 'right' ? -(this._refs.inner.clientWidth / 2) - childMargin : -childMargin;
     } ////////////////////
     // Render methods //
