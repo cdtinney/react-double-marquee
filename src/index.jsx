@@ -99,7 +99,7 @@ export default class Marquee extends PureComponent {
 
   _resetPosition() {
     this._pos.x = this._getInitialPosition();
-    
+
     if (this._refs.inner) {
       this._refs.inner.style.transform = translateXCSS(this._pos.x);
     }
