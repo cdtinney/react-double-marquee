@@ -195,7 +195,10 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
     key: "_resetPosition",
     value: function _resetPosition() {
       this._pos.x = this._getInitialPosition();
-      this._refs.inner.style.transform = translateXCSS(this._pos.x);
+
+      if (this._refs.inner) {
+        this._refs.inner.style.transform = translateXCSS(this._pos.x);
+      }
     }
   }, {
     key: "_requestAnimationWithDelay",
@@ -246,14 +249,17 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
         if (direction === 'left') {
           var _nextPos = _this2._pos.x - timeDelta * speed;
 
-          return _nextPos < -(_this2._refs.inner.clientWidth / 2) - childMargin ? _this2._getInitialPosition() : _nextPos;
+          return _nextPos < -(_this2._getWidthSafely() / 2) - childMargin ? _this2._getInitialPosition() : _nextPos;
         }
 
         return _this2._pos.x;
       }();
 
       this._pos.x = nextPosX;
-      this._refs.inner.style.transform = translateXCSS(nextPosX);
+
+      if (this._refs.inner) {
+        this._refs.inner.style.transform = translateXCSS(this._pos.x);
+      }
     }
   }, {
     key: "_getInitialPosition",
@@ -261,7 +267,17 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
       var _this$props2 = this.props,
           direction = _this$props2.direction,
           childMargin = _this$props2.childMargin;
-      return direction === 'right' ? -(this._refs.inner.clientWidth / 2) - childMargin : -childMargin;
+      return direction === 'right' ? -(this._getWidthSafely() / 2) - childMargin : -childMargin;
+    }
+  }, {
+    key: "_getWidthSafely",
+    value: function _getWidthSafely() {
+      return this._refs && this._refs.inner ? this._refs.inner.clientWidth : 0;
+    }
+  }, {
+    key: "_getStyleSafely",
+    value: function _getStyleSafely() {
+      return this._refs && this._refs.inner ? this._refs.inner.style : null;
     } ////////////////////
     // Render methods //
     ////////////////////
