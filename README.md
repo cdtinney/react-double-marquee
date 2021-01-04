@@ -69,6 +69,7 @@ export default function FooComponent() {
 | `delay`       | `Number`          | 3000                                   | Time until animation begins, in milliseconds.  |
 | `direction`   | `"right"\|\|"left"` | `"right"`                              | Horizontal direction.                          |
 | `childMargin` | `Number`          | 10                                     | Horizontal margin between children, in pixels. |
+| `resetOnPropsChange` | `Bool`     | true                                   | Reset position when props change               |
 | `children`    | React node        | None | Children to render within the marquee. |
 
 ## Developing
