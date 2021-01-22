@@ -70,6 +70,7 @@ export default function FooComponent() {
 | `direction`   | `"right"\|\|"left"` | `"right"`                              | Horizontal direction.                          |
 | `childMargin` | `Number`          | 10                                     | Horizontal margin between children, in pixels. |
 | `children`    | React node        | None | Children to render within the marquee. |
+| `scrollWhen`  | `"overflow"\|\|"always"` | `"always"`  | Whether the text always scrolls, or only when the content overflows the container width. |
 
 ## Developing
 
