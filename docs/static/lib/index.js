@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 function _classCallCheck(instance, Constructor) {
@@ -121,8 +121,13 @@ function translateXCSS(numPx) {
   return "translateX(".concat(numPx, "px)");
 }
 
-var Marquee = /*#__PURE__*/function (_PureComponent) {
-  _inherits(Marquee, _PureComponent);
+var ScrollWhen = {
+  always: 0,
+  overflow: 100
+};
+
+var Marquee = /*#__PURE__*/function (_Component) {
+  _inherits(Marquee, _Component);
 
   var _super = _createSuper(Marquee);
 
@@ -150,9 +155,15 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
       inner: null
     });
 
+    _this.state = {
+      disableScroll: undefined
+    };
     _this._setContainerRef = _this._setContainerRef.bind(_assertThisInitialized(_this));
     _this._setInnerRef = _this._setInnerRef.bind(_assertThisInitialized(_this));
     _this._tick = _this._tick.bind(_assertThisInitialized(_this));
+    _this._hasRefs = _this._hasRefs.bind(_assertThisInitialized(_this));
+    _this._shouldAnimate = _this._shouldAnimate.bind(_assertThisInitialized(_this));
+    _this._getMarqueeFillPercent = _this._getMarqueeFillPercent.bind(_assertThisInitialized(_this));
     return _this;
   } ///////////////////////
   // Lifecycle methods //
@@ -192,13 +203,31 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
       this._refs.inner = ref;
     }
   }, {
+    key: "_updateScrollState",
+    value: function _updateScrollState() {
+      var disableScroll = this.state.disableScroll;
+
+      if (this._hasRefs()) {
+        var shouldDisableScroll = !this._shouldAnimate();
+
+        if (disableScroll !== shouldDisableScroll) {
+          this.setState({
+            disableScroll: shouldDisableScroll
+          });
+          this._refs.inner.style.transform = translateXCSS(0);
+        }
+      }
+    }
+  }, {
     key: "_resetPosition",
     value: function _resetPosition() {
       this._pos.x = this._getInitialPosition();
 
-      if (this._refs.inner) {
+      if (this._shouldAnimate()) {
         this._refs.inner.style.transform = translateXCSS(this._pos.x);
       }
+
+      this._updateScrollState();
     }
   }, {
     key: "_requestAnimationWithDelay",
@@ -209,13 +238,28 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
   }, {
     key: "_requestAnimationIfNeeded",
     value: function _requestAnimationIfNeeded() {
-      var shouldAnimate = this._refs.container && this._refs.inner && this._refs.inner.scrollWidth > this._refs.container.clientWidth;
-
-      if (!shouldAnimate) {
-        return;
+      this._animationState.lastRequestId = window.requestAnimationFrame(this._tick);
+    }
+  }, {
+    key: "_getMarqueeFillPercent",
+    value: function _getMarqueeFillPercent() {
+      if (this._hasRefs() && this._refs.container.clientWidth > 0) {
+        var singleChildSize = this._refs.inner.scrollWidth / 2;
+        return singleChildSize * 100 / this._refs.container.clientWidth;
       }
 
-      this._animationState.lastRequestId = window.requestAnimationFrame(this._tick);
+      return 0;
+    }
+  }, {
+    key: "_hasRefs",
+    value: function _hasRefs() {
+      return this._refs.container && this._refs.inner;
+    }
+  }, {
+    key: "_shouldAnimate",
+    value: function _shouldAnimate() {
+      var scrollWhen = this.props.scrollWhen;
+      return this._hasRefs() && this._refs.inner.scrollWidth > this._refs.container.clientWidth && this._getMarqueeFillPercent() > ScrollWhen[scrollWhen];
     }
   }, {
     key: "_tick",
@@ -229,6 +273,8 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
       this._animationState.lastTickTime = time;
 
       this._requestAnimationIfNeeded();
+
+      this._updateScrollState();
     }
   }, {
     key: "_updateInnerPosition",
@@ -257,7 +303,7 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
 
       this._pos.x = nextPosX;
 
-      if (this._refs.inner) {
+      if (this._shouldAnimate()) {
         this._refs.inner.style.transform = translateXCSS(this._pos.x);
       }
     }
@@ -288,11 +334,14 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
       var _this$props3 = this.props,
           childMargin = _this$props3.childMargin,
           children = _this$props3.children;
+      var disableScroll = this.state.disableScroll;
 
-      var Child = function Child() {
+      var Child = function Child(_ref) {
+        var invisible = _ref.invisible;
         return /*#__PURE__*/React.createElement("span", {
           style: {
-            margin: "0 ".concat(childMargin, "px")
+            margin: disableScroll ? '0' : "0 ".concat(childMargin, "px"),
+            visibility: invisible ? 'hidden' : ''
           }
         }, children);
       };
@@ -307,12 +356,14 @@ var Marquee = /*#__PURE__*/function (_PureComponent) {
         style: {
           display: 'inline-block'
         }
-      }, /*#__PURE__*/React.createElement(Child, null), /*#__PURE__*/React.createElement(Child, null)));
+      }, /*#__PURE__*/React.createElement(Child, null), /*#__PURE__*/React.createElement(Child, {
+        invisible: disableScroll
+      })));
     }
   }]);
 
   return Marquee;
-}(PureComponent);
+}(Component);
 
 _defineProperty(Marquee, "propTypes", {
   /**
@@ -343,7 +394,12 @@ _defineProperty(Marquee, "propTypes", {
    * Children to render.
    * Default is `null`.
    */
-  children: PropTypes.node
+  children: PropTypes.node,
+
+  /*
+  * How to determine when scrolling is enabled
+  * */
+  scrollWhen: PropTypes.oneOf(Object.keys(ScrollWhen))
 });
 
 _defineProperty(Marquee, "defaultProps", {
@@ -351,7 +407,9 @@ _defineProperty(Marquee, "defaultProps", {
   delay: 3000,
   direction: 'right',
   childMargin: 15,
-  children: null
+  children: null,
+  scrollWhen: 'always'
 });
 
 export default Marquee;
+export { ScrollWhen };
