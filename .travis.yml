@@ -6,6 +6,8 @@ script:
   - npm run build
   - npm run lint
   - npm run docs
+
+after_success:
   - npm run test:coveralls
 
 deploy:
