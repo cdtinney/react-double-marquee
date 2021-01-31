@@ -27,7 +27,7 @@ describe('Marquee', () => {
     const wrapper = mount(<Marquee>foo</Marquee>);
     wrapper.instance()._resetPosition = jest.fn();
     wrapper.setProps({
-      resetOnPropsChange: false
+      resetOnPropsChange: false,
     }, () => {
       expect(wrapper.instance()._resetPosition).not.toHaveBeenCalled();
       done();
