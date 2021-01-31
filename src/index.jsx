@@ -54,6 +54,11 @@ export default class Marquee extends Component {
      * Default is `null`.
      */
     children: PropTypes.node,
+    /**
+     * Reset position when props change
+     * Default is true
+     */
+    resetOnPropsChange: PropTypes.bool,
     /*
     * How to determine when scrolling is enabled
     * */
@@ -65,6 +70,7 @@ export default class Marquee extends Component {
     delay: 3000,
     direction: 'right',
     childMargin: 15,
+    resetOnPropsChange: true,
     children: null,
     scrollWhen: 'always',
   };
@@ -94,7 +100,10 @@ export default class Marquee extends Component {
   }
 
   componentDidUpdate() {
-    this._resetPosition();
+    const { resetOnPropsChange } = this.props;
+    if (resetOnPropsChange) {
+      this._resetPosition();
+    }
     this._requestAnimationWithDelay();
   }
 

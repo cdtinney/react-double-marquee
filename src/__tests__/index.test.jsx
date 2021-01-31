@@ -23,6 +23,17 @@ describe('Marquee', () => {
     });
   });
 
+  it('does not reset the position when resetOnPropsChange is set to false on prop updates', (done) => {
+    const wrapper = mount(<Marquee>foo</Marquee>);
+    wrapper.instance()._resetPosition = jest.fn();
+    wrapper.setProps({
+      resetOnPropsChange: false,
+    }, () => {
+      expect(wrapper.instance()._resetPosition).not.toHaveBeenCalled();
+      done();
+    });
+  });
+
   // Behaviour based on clientHeight is not currently possible with JSDom:
   //  https://github.com/airbnb/enzyme/issues/1435
   // This means that the component will never trigger an animation.
