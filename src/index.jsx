@@ -53,7 +53,7 @@ export default class Marquee extends PureComponent {
      * Reset position when props change
      * Default is true
      */
-    resetOnPropsChange: PropTypes.bool
+    resetOnPropsChange: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -62,7 +62,7 @@ export default class Marquee extends PureComponent {
     direction: 'right',
     childMargin: 15,
     resetOnPropsChange: true,
-    children: null
+    children: null,
   };
 
   constructor(props) {
@@ -83,8 +83,9 @@ export default class Marquee extends PureComponent {
   }
 
   componentDidUpdate() {
-    if (this.props.resetOnPropsChange) {
-      this._resetPosition(); 
+    const { resetOnPropsChange } = this.props;
+    if (resetOnPropsChange) {
+      this._resetPosition();
     }
     this._requestAnimationWithDelay();
   }
