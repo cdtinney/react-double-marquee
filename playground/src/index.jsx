@@ -14,6 +14,8 @@ import injectSheet from 'react-jss';
 import Header from './components/Header';
 import DefaultRightMarquee from './examples/DefaultRightMarquee';
 import DefaultLeftMarquee from './examples/DefaultLeftMarquee';
+import ShortMarquee from './examples/ShortMarquee';
+import ShortScrollingMarquee from './examples/ShortScrollingMarquee';
 
 import './styles.css';
 
@@ -42,6 +44,8 @@ function Index({
       <div className={classes.examples}>
         <DefaultRightMarquee />
         <DefaultLeftMarquee />
+        <ShortScrollingMarquee />
+        <ShortMarquee />
       </div>
     </div>
   );

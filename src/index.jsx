@@ -1,11 +1,16 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 function translateXCSS(numPx) {
   return `translateX(${numPx}px)`;
 }
 
-export default class Marquee extends PureComponent {
+export const ScrollWhen = {
+  always: 0,
+  overflow: 100,
+};
+
+export default class Marquee extends Component {
   // Animation properties.
   _animationState = {
     lastRequestId: null,
@@ -54,6 +59,10 @@ export default class Marquee extends PureComponent {
      * Default is true
      */
     resetOnPropsChange: PropTypes.bool,
+    /*
+    * How to determine when scrolling is enabled
+    * */
+    scrollWhen: PropTypes.oneOf(Object.keys(ScrollWhen)),
   };
 
   static defaultProps = {
@@ -63,14 +72,22 @@ export default class Marquee extends PureComponent {
     childMargin: 15,
     resetOnPropsChange: true,
     children: null,
+    scrollWhen: 'always',
   };
 
   constructor(props) {
     super(props);
 
+    this.state = {
+      disableScroll: undefined,
+    };
+
     this._setContainerRef = this._setContainerRef.bind(this);
     this._setInnerRef = this._setInnerRef.bind(this);
     this._tick = this._tick.bind(this);
+    this._hasRefs = this._hasRefs.bind(this);
+    this._shouldAnimate = this._shouldAnimate.bind(this);
+    this._getMarqueeFillPercent = this._getMarqueeFillPercent.bind(this);
   }
 
   ///////////////////////
@@ -106,12 +123,23 @@ export default class Marquee extends PureComponent {
     this._refs.inner = ref;
   }
 
+  _updateScrollState() {
+    const { disableScroll } = this.state;
+    if (this._hasRefs()) {
+      const shouldDisableScroll = !this._shouldAnimate();
+      if (disableScroll !== shouldDisableScroll) {
+        this.setState({ disableScroll: shouldDisableScroll });
+        this._refs.inner.style.transform = translateXCSS(0);
+      }
+    }
+  }
+
   _resetPosition() {
     this._pos.x = this._getInitialPosition();
-
-    if (this._refs.inner) {
+    if (this._shouldAnimate()) {
       this._refs.inner.style.transform = translateXCSS(this._pos.x);
     }
+    this._updateScrollState();
   }
 
   _requestAnimationWithDelay() {
@@ -121,14 +149,27 @@ export default class Marquee extends PureComponent {
   }
 
   _requestAnimationIfNeeded() {
-    const shouldAnimate = this._refs.container
-      && this._refs.inner
-      && this._refs.inner.scrollWidth > this._refs.container.clientWidth;
-    if (!shouldAnimate) {
-      return;
-    }
-
     this._animationState.lastRequestId = window.requestAnimationFrame(this._tick);
+  }
+
+  _getMarqueeFillPercent() {
+    if (this._hasRefs() && this._refs.container.clientWidth > 0) {
+      const singleChildSize = (this._refs.inner.scrollWidth / 2);
+      return singleChildSize * 100 / this._refs.container.clientWidth;
+    }
+    return 0;
+  }
+
+  _hasRefs() {
+    return this._refs.container
+    && this._refs.inner;
+  }
+
+  _shouldAnimate() {
+    const { scrollWhen } = this.props;
+    return this._hasRefs()
+      && this._refs.inner.scrollWidth > this._refs.container.clientWidth
+      && this._getMarqueeFillPercent() > ScrollWhen[scrollWhen];
   }
 
   _tick(time) {
@@ -140,6 +181,7 @@ export default class Marquee extends PureComponent {
 
     this._animationState.lastTickTime = time;
     this._requestAnimationIfNeeded();
+    this._updateScrollState();
   }
 
   _updateInnerPosition(timeDelta) {
@@ -161,7 +203,7 @@ export default class Marquee extends PureComponent {
 
     this._pos.x = nextPosX;
 
-    if (this._refs.inner) {
+    if (this._shouldAnimate()) {
       this._refs.inner.style.transform = translateXCSS(this._pos.x);
     }
   }
@@ -188,12 +230,13 @@ export default class Marquee extends PureComponent {
 
   render() {
     const { childMargin, children } = this.props;
+    const { disableScroll } = this.state;
 
-    const Child = () => (
-      <span
-        style={{
-          margin: `0 ${childMargin}px`,
-        }}
+    const Child = ({ invisible }) => (
+      <span style={{
+        margin: disableScroll ? '0' : `0 ${childMargin}px`,
+        visibility: invisible ? 'hidden' : '',
+      }}
       >
         {children}
       </span>
@@ -213,7 +256,7 @@ export default class Marquee extends PureComponent {
           }}
         >
           <Child />
-          <Child />
+          <Child invisible={disableScroll} />
         </div>
       </div>
     );
