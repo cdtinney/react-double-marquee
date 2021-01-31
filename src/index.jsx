@@ -53,7 +53,7 @@ export default class Marquee extends PureComponent {
      * Reset position when props change
      * Default is true
      */
-    resetOnPropsChange: PropTypes.bool;
+    resetOnPropsChange: PropTypes.bool
   };
 
   static defaultProps = {
