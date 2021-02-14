@@ -44,7 +44,7 @@ function ExampleCard({
         <div>
           {description}
         </div>
-        <div className={classes.props}>
+        <div className={classes}>
           <JSONPretty
             data={{
               // Wrap it so that it's obvious to readers that
@@ -73,7 +73,6 @@ function ExampleCard({
 ExampleCard.propTypes = {
   classes: PropTypes.shape({
     root: PropTypes.string.isRequired,
-    props: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     marqueeOuter: PropTypes.string.isRequired,
     marqueeInner: PropTypes.string.isRequired,

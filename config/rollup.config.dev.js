@@ -1,5 +1,5 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
+import commonjs from '@rollup/plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import replace from 'rollup-plugin-replace';
 import { liveServer } from 'rollup-plugin-live-server';
@@ -57,18 +57,6 @@ module.exports = [{
       exclude: [
         'node_modules/process-es6/**',
       ],
-      namedExports: {
-        'node_modules/react/index.js': [
-          'Component',
-          'PureComponent',
-          'Fragment',
-          'Children',
-          'createElement',
-        ],
-        'node_modules/react-dom/index.js': [
-          'render',
-        ],
-      },
     }),
     replace({
       'process.env.NODE_ENV':
