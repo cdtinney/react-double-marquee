@@ -7333,14 +7333,14 @@
 
 	function DefaultRightMarquee() {
 	  return /*#__PURE__*/react.createElement(ExampleCard$1, {
-	    description: "Default Text - Right Direction",
+	    description: "Right direction",
 	    marqueeComponent: /*#__PURE__*/react.createElement(Marquee, null, "This is a very long and boring sentence with no meaning whatsoever")
 	  });
 	}
 
 	function DefaultLeftMarquee() {
 	  return /*#__PURE__*/react.createElement(ExampleCard$1, {
-	    description: "Default Text - Left Direction",
+	    description: "Left direction",
 	    marqueeComponent: /*#__PURE__*/react.createElement(Marquee, {
 	      direction: "left"
 	    }, "This is a very long and boring sentence with no meaning whatsoever")
