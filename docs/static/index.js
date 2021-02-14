@@ -163,34 +163,34 @@
 
 	var react_development = createCommonjsModule(function (module, exports) {
 	});
-	var react_development_1 = react_development.Children;
-	var react_development_2 = react_development.Component;
-	var react_development_3 = react_development.Fragment;
-	var react_development_4 = react_development.Profiler;
-	var react_development_5 = react_development.PureComponent;
-	var react_development_6 = react_development.StrictMode;
-	var react_development_7 = react_development.Suspense;
-	var react_development_8 = react_development.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-	var react_development_9 = react_development.cloneElement;
-	var react_development_10 = react_development.createContext;
-	var react_development_11 = react_development.createElement;
-	var react_development_12 = react_development.createFactory;
-	var react_development_13 = react_development.createRef;
-	var react_development_14 = react_development.forwardRef;
-	var react_development_15 = react_development.isValidElement;
-	var react_development_16 = react_development.lazy;
-	var react_development_17 = react_development.memo;
-	var react_development_18 = react_development.useCallback;
-	var react_development_19 = react_development.useContext;
-	var react_development_20 = react_development.useDebugValue;
-	var react_development_21 = react_development.useEffect;
-	var react_development_22 = react_development.useImperativeHandle;
-	var react_development_23 = react_development.useLayoutEffect;
-	var react_development_24 = react_development.useMemo;
-	var react_development_25 = react_development.useReducer;
-	var react_development_26 = react_development.useRef;
-	var react_development_27 = react_development.useState;
-	var react_development_28 = react_development.version;
+	react_development.Children;
+	react_development.Component;
+	react_development.Fragment;
+	react_development.Profiler;
+	react_development.PureComponent;
+	react_development.StrictMode;
+	react_development.Suspense;
+	react_development.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+	react_development.cloneElement;
+	react_development.createContext;
+	react_development.createElement;
+	react_development.createFactory;
+	react_development.createRef;
+	react_development.forwardRef;
+	react_development.isValidElement;
+	react_development.lazy;
+	react_development.memo;
+	react_development.useCallback;
+	react_development.useContext;
+	react_development.useDebugValue;
+	react_development.useEffect;
+	react_development.useImperativeHandle;
+	react_development.useLayoutEffect;
+	react_development.useMemo;
+	react_development.useReducer;
+	react_development.useRef;
+	react_development.useState;
+	react_development.version;
 
 	var react = createCommonjsModule(function (module) {
 
@@ -199,10 +199,10 @@
 	}
 	});
 	var react_1 = react.Component;
-	var react_2 = react.PureComponent;
-	var react_3 = react.Fragment;
-	var react_4 = react.Children;
-	var react_5 = react.createElement;
+	react.PureComponent;
+	react.Fragment;
+	react.Children;
+	react.createElement;
 
 	/** @license React v16.13.1
 	 * react-is.production.min.js
@@ -252,43 +252,43 @@
 
 	var reactIs_development = createCommonjsModule(function (module, exports) {
 	});
-	var reactIs_development_1 = reactIs_development.AsyncMode;
-	var reactIs_development_2 = reactIs_development.ConcurrentMode;
-	var reactIs_development_3 = reactIs_development.ContextConsumer;
-	var reactIs_development_4 = reactIs_development.ContextProvider;
-	var reactIs_development_5 = reactIs_development.Element;
-	var reactIs_development_6 = reactIs_development.ForwardRef;
-	var reactIs_development_7 = reactIs_development.Fragment;
-	var reactIs_development_8 = reactIs_development.Lazy;
-	var reactIs_development_9 = reactIs_development.Memo;
-	var reactIs_development_10 = reactIs_development.Portal;
-	var reactIs_development_11 = reactIs_development.Profiler;
-	var reactIs_development_12 = reactIs_development.StrictMode;
-	var reactIs_development_13 = reactIs_development.Suspense;
-	var reactIs_development_14 = reactIs_development.isAsyncMode;
-	var reactIs_development_15 = reactIs_development.isConcurrentMode;
-	var reactIs_development_16 = reactIs_development.isContextConsumer;
-	var reactIs_development_17 = reactIs_development.isContextProvider;
-	var reactIs_development_18 = reactIs_development.isElement;
-	var reactIs_development_19 = reactIs_development.isForwardRef;
-	var reactIs_development_20 = reactIs_development.isFragment;
-	var reactIs_development_21 = reactIs_development.isLazy;
-	var reactIs_development_22 = reactIs_development.isMemo;
-	var reactIs_development_23 = reactIs_development.isPortal;
-	var reactIs_development_24 = reactIs_development.isProfiler;
-	var reactIs_development_25 = reactIs_development.isStrictMode;
-	var reactIs_development_26 = reactIs_development.isSuspense;
-	var reactIs_development_27 = reactIs_development.isValidElementType;
-	var reactIs_development_28 = reactIs_development.typeOf;
+	reactIs_development.AsyncMode;
+	reactIs_development.ConcurrentMode;
+	reactIs_development.ContextConsumer;
+	reactIs_development.ContextProvider;
+	reactIs_development.Element;
+	reactIs_development.ForwardRef;
+	reactIs_development.Fragment;
+	reactIs_development.Lazy;
+	reactIs_development.Memo;
+	reactIs_development.Portal;
+	reactIs_development.Profiler;
+	reactIs_development.StrictMode;
+	reactIs_development.Suspense;
+	reactIs_development.isAsyncMode;
+	reactIs_development.isConcurrentMode;
+	reactIs_development.isContextConsumer;
+	reactIs_development.isContextProvider;
+	reactIs_development.isElement;
+	reactIs_development.isForwardRef;
+	reactIs_development.isFragment;
+	reactIs_development.isLazy;
+	reactIs_development.isMemo;
+	reactIs_development.isPortal;
+	reactIs_development.isProfiler;
+	reactIs_development.isStrictMode;
+	reactIs_development.isSuspense;
+	reactIs_development.isValidElementType;
+	reactIs_development.typeOf;
 
-	var reactIs = createCommonjsModule(function (module) {
+	createCommonjsModule(function (module) {
 
 	{
 	  module.exports = reactIs_production_min;
 	}
 	});
 
-	var has = Function.call.bind(Object.prototype.hasOwnProperty);
+	Function.call.bind(Object.prototype.hasOwnProperty);
 
 	function emptyFunction() {}
 	function emptyFunctionWithReset() {}
@@ -371,47 +371,47 @@
 	exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();if("object"===typeof c&&null!==c){var e=c.delay;e="number"===typeof e&&0<e?d+e:d;c="number"===typeof c.timeout?c.timeout:Y(a);}else c=Y(a),e=d;c=e+c;a={id:P++,callback:b,priorityLevel:a,startTime:e,expirationTime:c,sortIndex:-1};e>d?(a.sortIndex=e,J(O,a),null===L(N)&&a===L(O)&&(U?h():U=!0,g(W,e-d))):(a.sortIndex=c,J(N,a),T||S||(T=!0,f(X)));return a};
 	exports.unstable_shouldYield=function(){var a=exports.unstable_now();V(a);var b=L(N);return b!==Q&&null!==Q&&null!==b&&null!==b.callback&&b.startTime<=a&&b.expirationTime<Q.expirationTime||k()};exports.unstable_wrapCallback=function(a){var b=R;return function(){var c=R;R=b;try{return a.apply(this,arguments)}finally{R=c;}}};
 	});
-	var scheduler_production_min_1 = scheduler_production_min.unstable_now;
-	var scheduler_production_min_2 = scheduler_production_min.unstable_forceFrameRate;
-	var scheduler_production_min_3 = scheduler_production_min.unstable_IdlePriority;
-	var scheduler_production_min_4 = scheduler_production_min.unstable_ImmediatePriority;
-	var scheduler_production_min_5 = scheduler_production_min.unstable_LowPriority;
-	var scheduler_production_min_6 = scheduler_production_min.unstable_NormalPriority;
-	var scheduler_production_min_7 = scheduler_production_min.unstable_Profiling;
-	var scheduler_production_min_8 = scheduler_production_min.unstable_UserBlockingPriority;
-	var scheduler_production_min_9 = scheduler_production_min.unstable_cancelCallback;
-	var scheduler_production_min_10 = scheduler_production_min.unstable_continueExecution;
-	var scheduler_production_min_11 = scheduler_production_min.unstable_getCurrentPriorityLevel;
-	var scheduler_production_min_12 = scheduler_production_min.unstable_getFirstCallbackNode;
-	var scheduler_production_min_13 = scheduler_production_min.unstable_next;
-	var scheduler_production_min_14 = scheduler_production_min.unstable_pauseExecution;
-	var scheduler_production_min_15 = scheduler_production_min.unstable_requestPaint;
-	var scheduler_production_min_16 = scheduler_production_min.unstable_runWithPriority;
-	var scheduler_production_min_17 = scheduler_production_min.unstable_scheduleCallback;
-	var scheduler_production_min_18 = scheduler_production_min.unstable_shouldYield;
-	var scheduler_production_min_19 = scheduler_production_min.unstable_wrapCallback;
+	scheduler_production_min.unstable_now;
+	scheduler_production_min.unstable_forceFrameRate;
+	scheduler_production_min.unstable_IdlePriority;
+	scheduler_production_min.unstable_ImmediatePriority;
+	scheduler_production_min.unstable_LowPriority;
+	scheduler_production_min.unstable_NormalPriority;
+	scheduler_production_min.unstable_Profiling;
+	scheduler_production_min.unstable_UserBlockingPriority;
+	scheduler_production_min.unstable_cancelCallback;
+	scheduler_production_min.unstable_continueExecution;
+	scheduler_production_min.unstable_getCurrentPriorityLevel;
+	scheduler_production_min.unstable_getFirstCallbackNode;
+	scheduler_production_min.unstable_next;
+	scheduler_production_min.unstable_pauseExecution;
+	scheduler_production_min.unstable_requestPaint;
+	scheduler_production_min.unstable_runWithPriority;
+	scheduler_production_min.unstable_scheduleCallback;
+	scheduler_production_min.unstable_shouldYield;
+	scheduler_production_min.unstable_wrapCallback;
 
 	var scheduler_development = createCommonjsModule(function (module, exports) {
 	});
-	var scheduler_development_1 = scheduler_development.unstable_now;
-	var scheduler_development_2 = scheduler_development.unstable_forceFrameRate;
-	var scheduler_development_3 = scheduler_development.unstable_IdlePriority;
-	var scheduler_development_4 = scheduler_development.unstable_ImmediatePriority;
-	var scheduler_development_5 = scheduler_development.unstable_LowPriority;
-	var scheduler_development_6 = scheduler_development.unstable_NormalPriority;
-	var scheduler_development_7 = scheduler_development.unstable_Profiling;
-	var scheduler_development_8 = scheduler_development.unstable_UserBlockingPriority;
-	var scheduler_development_9 = scheduler_development.unstable_cancelCallback;
-	var scheduler_development_10 = scheduler_development.unstable_continueExecution;
-	var scheduler_development_11 = scheduler_development.unstable_getCurrentPriorityLevel;
-	var scheduler_development_12 = scheduler_development.unstable_getFirstCallbackNode;
-	var scheduler_development_13 = scheduler_development.unstable_next;
-	var scheduler_development_14 = scheduler_development.unstable_pauseExecution;
-	var scheduler_development_15 = scheduler_development.unstable_requestPaint;
-	var scheduler_development_16 = scheduler_development.unstable_runWithPriority;
-	var scheduler_development_17 = scheduler_development.unstable_scheduleCallback;
-	var scheduler_development_18 = scheduler_development.unstable_shouldYield;
-	var scheduler_development_19 = scheduler_development.unstable_wrapCallback;
+	scheduler_development.unstable_now;
+	scheduler_development.unstable_forceFrameRate;
+	scheduler_development.unstable_IdlePriority;
+	scheduler_development.unstable_ImmediatePriority;
+	scheduler_development.unstable_LowPriority;
+	scheduler_development.unstable_NormalPriority;
+	scheduler_development.unstable_Profiling;
+	scheduler_development.unstable_UserBlockingPriority;
+	scheduler_development.unstable_cancelCallback;
+	scheduler_development.unstable_continueExecution;
+	scheduler_development.unstable_getCurrentPriorityLevel;
+	scheduler_development.unstable_getFirstCallbackNode;
+	scheduler_development.unstable_next;
+	scheduler_development.unstable_pauseExecution;
+	scheduler_development.unstable_requestPaint;
+	scheduler_development.unstable_runWithPriority;
+	scheduler_development.unstable_scheduleCallback;
+	scheduler_development.unstable_shouldYield;
+	scheduler_development.unstable_wrapCallback;
 
 	var scheduler = createCommonjsModule(function (module) {
 
@@ -739,17 +739,17 @@
 
 	var schedulerTracing_development = createCommonjsModule(function (module, exports) {
 	});
-	var schedulerTracing_development_1 = schedulerTracing_development.__interactionsRef;
-	var schedulerTracing_development_2 = schedulerTracing_development.__subscriberRef;
-	var schedulerTracing_development_3 = schedulerTracing_development.unstable_clear;
-	var schedulerTracing_development_4 = schedulerTracing_development.unstable_getCurrent;
-	var schedulerTracing_development_5 = schedulerTracing_development.unstable_getThreadID;
-	var schedulerTracing_development_6 = schedulerTracing_development.unstable_subscribe;
-	var schedulerTracing_development_7 = schedulerTracing_development.unstable_trace;
-	var schedulerTracing_development_8 = schedulerTracing_development.unstable_unsubscribe;
-	var schedulerTracing_development_9 = schedulerTracing_development.unstable_wrap;
+	schedulerTracing_development.__interactionsRef;
+	schedulerTracing_development.__subscriberRef;
+	schedulerTracing_development.unstable_clear;
+	schedulerTracing_development.unstable_getCurrent;
+	schedulerTracing_development.unstable_getThreadID;
+	schedulerTracing_development.unstable_subscribe;
+	schedulerTracing_development.unstable_trace;
+	schedulerTracing_development.unstable_unsubscribe;
+	schedulerTracing_development.unstable_wrap;
 
-	var tracing = createCommonjsModule(function (module) {
+	createCommonjsModule(function (module) {
 
 	{
 	  module.exports = schedulerTracing_production_min;
@@ -758,17 +758,17 @@
 
 	var reactDom_development = createCommonjsModule(function (module, exports) {
 	});
-	var reactDom_development_1 = reactDom_development.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-	var reactDom_development_2 = reactDom_development.createPortal;
-	var reactDom_development_3 = reactDom_development.findDOMNode;
-	var reactDom_development_4 = reactDom_development.flushSync;
-	var reactDom_development_5 = reactDom_development.hydrate;
-	var reactDom_development_6 = reactDom_development.render;
-	var reactDom_development_7 = reactDom_development.unmountComponentAtNode;
-	var reactDom_development_8 = reactDom_development.unstable_batchedUpdates;
-	var reactDom_development_9 = reactDom_development.unstable_createPortal;
-	var reactDom_development_10 = reactDom_development.unstable_renderSubtreeIntoContainer;
-	var reactDom_development_11 = reactDom_development.version;
+	reactDom_development.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+	reactDom_development.createPortal;
+	reactDom_development.findDOMNode;
+	reactDom_development.flushSync;
+	reactDom_development.hydrate;
+	reactDom_development.render;
+	reactDom_development.unmountComponentAtNode;
+	reactDom_development.unstable_batchedUpdates;
+	reactDom_development.unstable_createPortal;
+	reactDom_development.unstable_renderSubtreeIntoContainer;
+	reactDom_development.version;
 
 	var reactDom = createCommonjsModule(function (module) {
 
@@ -797,7 +797,7 @@
 	  module.exports = reactDom_production_min;
 	}
 	});
-	var reactDom_1 = reactDom.render;
+	reactDom.render;
 
 	var isFunction_1 = isFunction;
 
@@ -2428,7 +2428,7 @@
 
 
 
-	var _StyleSheet2 = _interopRequireDefault(StyleSheet_1);
+	_interopRequireDefault(StyleSheet_1);
 
 
 
@@ -2446,7 +2446,7 @@
 
 	exports['default'] = function () {
 	  var ruleCounter = 0;
-	  var defaultPrefix =  'c' ;
+	  var defaultPrefix = 'c' ;
 
 	  return function (rule, sheet) {
 	    ruleCounter += 1;
@@ -3988,14 +3988,14 @@
 	});
 
 	unwrapExports(lib);
-	var lib_1 = lib.create;
-	var lib_2 = lib.createGenerateClassName;
-	var lib_3 = lib.sheets;
-	var lib_4 = lib.RuleList;
-	var lib_5 = lib.SheetsManager;
-	var lib_6 = lib.SheetsRegistry;
-	var lib_7 = lib.toCssValue;
-	var lib_8 = lib.getDynamicStyles;
+	lib.create;
+	lib.createGenerateClassName;
+	lib.sheets;
+	lib.RuleList;
+	lib.SheetsManager;
+	lib.SheetsRegistry;
+	lib.toCssValue;
+	lib.getDynamicStyles;
 
 	var parse = createCommonjsModule(function (module, exports) {
 
@@ -4915,7 +4915,7 @@
 	 * A scheme for converting properties from array to regular style.
 	 * All properties listed below will be transformed to a string separated by space.
 	 */
-	var propArray = exports.propArray = {
+	exports.propArray = {
 	  'background-size': true,
 	  'background-position': true,
 	  border: true,
@@ -4941,7 +4941,7 @@
 	   * A scheme for converting arrays to regular styles inside of objects.
 	   * For e.g.: "{position: [0, 0]}" => "background-position: 0 0;".
 	   */
-	};var propArrayInObj = exports.propArrayInObj = {
+	};exports.propArrayInObj = {
 	  position: true, // background-position
 	  size: true // background-size
 
@@ -4949,7 +4949,7 @@
 	  /**
 	   * A scheme for parsing and building correct styles from passed objects.
 	   */
-	};var propObj = exports.propObj = {
+	};exports.propObj = {
 	  padding: {
 	    top: 0,
 	    right: 0,
@@ -5044,7 +5044,7 @@
 	   * A scheme for converting non-standart properties inside object.
 	   * For e.g.: include 'border-radius' property inside 'border' object.
 	   */
-	};var customPropObj = exports.customPropObj = {
+	};exports.customPropObj = {
 	  border: {
 	    radius: 'border-radius',
 	    image: 'border-image',
@@ -5126,10 +5126,10 @@
 	});
 
 	unwrapExports(props);
-	var props_1 = props.propArray;
-	var props_2 = props.propArrayInObj;
-	var props_3 = props.propObj;
-	var props_4 = props.customPropObj;
+	props.propArray;
+	props.propArrayInObj;
+	props.propObj;
+	props.customPropObj;
 
 	var lib$8 = createCommonjsModule(function (module, exports) {
 
@@ -5589,9 +5589,9 @@
 	});
 
 	unwrapExports(lib$9);
-	var lib_1$1 = lib$9.supportedValue;
-	var lib_2$1 = lib$9.supportedProperty;
-	var lib_3$1 = lib$9.prefix;
+	lib$9.supportedValue;
+	lib$9.supportedProperty;
+	lib$9.prefix;
 
 	var lib$a = createCommonjsModule(function (module, exports) {
 
@@ -5785,10 +5785,10 @@
 	});
 
 	unwrapExports(jss);
-	var jss_1 = jss.createGenerateClassNameDefault;
-	var jss_2 = jss.SheetsManager;
-	var jss_3 = jss.getDynamicStyles;
-	var jss_4 = jss.SheetsRegistry;
+	jss.createGenerateClassNameDefault;
+	jss.SheetsManager;
+	jss.getDynamicStyles;
+	jss.SheetsRegistry;
 
 	var ns = createCommonjsModule(function (module, exports) {
 
@@ -5798,17 +5798,17 @@
 	/**
 	 * Namespaces to avoid conflicts on the context.
 	 */
-	var jss = exports.jss = '64a55d578f856d258dc345b094a2a2b3';
-	var sheetsRegistry = exports.sheetsRegistry = 'd4bd0baacbc52bbd48bbb9eb24344ecd';
-	var managers = exports.managers = 'b768b78919504fba9de2c03545c5cd3a';
-	var sheetOptions = exports.sheetOptions = '6fc570d6bd61383819d0f9e7407c452d';
+	exports.jss = '64a55d578f856d258dc345b094a2a2b3';
+	exports.sheetsRegistry = 'd4bd0baacbc52bbd48bbb9eb24344ecd';
+	exports.managers = 'b768b78919504fba9de2c03545c5cd3a';
+	exports.sheetOptions = '6fc570d6bd61383819d0f9e7407c452d';
 	});
 
 	unwrapExports(ns);
-	var ns_1 = ns.jss;
-	var ns_2 = ns.sheetsRegistry;
-	var ns_3 = ns.managers;
-	var ns_4 = ns.sheetOptions;
+	ns.jss;
+	ns.sheetsRegistry;
+	ns.managers;
+	ns.sheetOptions;
 
 	var propTypes$1 = createCommonjsModule(function (module, exports) {
 
@@ -6242,7 +6242,7 @@
 	  var themeListener = theming.themeListener;
 
 	  var displayName = (0, _getDisplayName2['default'])(InnerComponent);
-	  var defaultClassNamePrefix =  undefined ;
+	  var defaultClassNamePrefix = undefined ;
 	  var noTheme = {};
 	  var managerId = managersCounter++;
 	  var manager = new jss.SheetsManager();
@@ -7041,51 +7041,50 @@
 	  return Marquee;
 	}(react_1);
 
-	_defineProperty$3(Marquee, "propTypes", {
+	Marquee.propTypes = {
 	  /**
-	   * Animation speed, in pixels per milliseconds.
-	   * Defaults to 0.04.
-	   */
+	     * Animation speed, in pixels per milliseconds.
+	     * Defaults to 0.04.
+	     */
 	  speed: propTypes.number,
 
 	  /**
-	   * Direction of movement; either 'left' or 'right'.
-	   * Defaults to 'right'.
-	   */
+	     * Direction of movement; either 'left' or 'right'.
+	     * Defaults to 'right'.
+	     */
 	  direction: propTypes.oneOf(['left', 'right']),
 
 	  /**
-	   * Delay until animation starts, in milliseconds.
-	   * Defaults to three seconds.
-	   */
+	     * Delay until animation starts, in milliseconds.
+	     * Defaults to three seconds.
+	     */
 	  delay: propTypes.number,
 
 	  /**
-	   * Horizontal margin between children, in pixels.
-	   * Defaults to 10px.
-	   */
+	     * Horizontal margin between children, in pixels.
+	     * Defaults to 10px.
+	     */
 	  childMargin: propTypes.number,
 
 	  /**
-	   * Children to render.
-	   * Default is `null`.
-	   */
+	     * Children to render.
+	     * Default is `null`.
+	     */
 	  children: propTypes.node,
 
 	  /*
-	  * How to determine when scrolling is enabled
-	  * */
+	    * How to determine when scrolling is enabled
+	    * */
 	  scrollWhen: propTypes.oneOf(Object.keys(ScrollWhen))
-	});
-
-	_defineProperty$3(Marquee, "defaultProps", {
+	};
+	Marquee.defaultProps = {
 	  speed: 0.04,
 	  delay: 3000,
 	  direction: 'right',
 	  childMargin: 15,
 	  children: null,
 	  scrollWhen: 'always'
-	});
+	};
 
 	var JSONPretty_1 = createCommonjsModule(function (module) {
 	var __extends = (commonjsGlobal && commonjsGlobal.__extends) || (function () {

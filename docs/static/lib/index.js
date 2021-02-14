@@ -364,52 +364,50 @@ var Marquee = /*#__PURE__*/function (_Component) {
 
   return Marquee;
 }(Component);
-
-_defineProperty(Marquee, "propTypes", {
+Marquee.propTypes = {
   /**
-   * Animation speed, in pixels per milliseconds.
-   * Defaults to 0.04.
-   */
+     * Animation speed, in pixels per milliseconds.
+     * Defaults to 0.04.
+     */
   speed: PropTypes.number,
 
   /**
-   * Direction of movement; either 'left' or 'right'.
-   * Defaults to 'right'.
-   */
+     * Direction of movement; either 'left' or 'right'.
+     * Defaults to 'right'.
+     */
   direction: PropTypes.oneOf(['left', 'right']),
 
   /**
-   * Delay until animation starts, in milliseconds.
-   * Defaults to three seconds.
-   */
+     * Delay until animation starts, in milliseconds.
+     * Defaults to three seconds.
+     */
   delay: PropTypes.number,
 
   /**
-   * Horizontal margin between children, in pixels.
-   * Defaults to 10px.
-   */
+     * Horizontal margin between children, in pixels.
+     * Defaults to 10px.
+     */
   childMargin: PropTypes.number,
 
   /**
-   * Children to render.
-   * Default is `null`.
-   */
+     * Children to render.
+     * Default is `null`.
+     */
   children: PropTypes.node,
 
   /*
-  * How to determine when scrolling is enabled
-  * */
+    * How to determine when scrolling is enabled
+    * */
   scrollWhen: PropTypes.oneOf(Object.keys(ScrollWhen))
-});
-
-_defineProperty(Marquee, "defaultProps", {
+};
+Marquee.defaultProps = {
   speed: 0.04,
   delay: 3000,
   direction: 'right',
   childMargin: 15,
   children: null,
   scrollWhen: 'always'
-});
+};
 
 export default Marquee;
 export { ScrollWhen };

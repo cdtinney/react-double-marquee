@@ -28,47 +28,6 @@ export default class Marquee extends Component {
     inner: null,
   };
 
-  static propTypes = {
-    /**
-     * Animation speed, in pixels per milliseconds.
-     * Defaults to 0.04.
-     */
-    speed: PropTypes.number,
-    /**
-     * Direction of movement; either 'left' or 'right'.
-     * Defaults to 'right'.
-     */
-    direction: PropTypes.oneOf(['left', 'right']),
-    /**
-     * Delay until animation starts, in milliseconds.
-     * Defaults to three seconds.
-     */
-    delay: PropTypes.number,
-    /**
-     * Horizontal margin between children, in pixels.
-     * Defaults to 10px.
-     */
-    childMargin: PropTypes.number,
-    /**
-     * Children to render.
-     * Default is `null`.
-     */
-    children: PropTypes.node,
-    /*
-    * How to determine when scrolling is enabled
-    * */
-    scrollWhen: PropTypes.oneOf(Object.keys(ScrollWhen)),
-  };
-
-  static defaultProps = {
-    speed: 0.04,
-    delay: 3000,
-    direction: 'right',
-    childMargin: 15,
-    children: null,
-    scrollWhen: 'always',
-  };
-
   constructor(props) {
     super(props);
 
@@ -146,7 +105,7 @@ export default class Marquee extends Component {
   _getMarqueeFillPercent() {
     if (this._hasRefs() && this._refs.container.clientWidth > 0) {
       const singleChildSize = (this._refs.inner.scrollWidth / 2);
-      return singleChildSize * 100 / this._refs.container.clientWidth;
+      return (singleChildSize * 100) / this._refs.container.clientWidth;
     }
     return 0;
   }
@@ -253,3 +212,44 @@ export default class Marquee extends Component {
     );
   }
 }
+
+Marquee.propTypes = {
+  /**
+     * Animation speed, in pixels per milliseconds.
+     * Defaults to 0.04.
+     */
+  speed: PropTypes.number,
+  /**
+     * Direction of movement; either 'left' or 'right'.
+     * Defaults to 'right'.
+     */
+  direction: PropTypes.oneOf(['left', 'right']),
+  /**
+     * Delay until animation starts, in milliseconds.
+     * Defaults to three seconds.
+     */
+  delay: PropTypes.number,
+  /**
+     * Horizontal margin between children, in pixels.
+     * Defaults to 10px.
+     */
+  childMargin: PropTypes.number,
+  /**
+     * Children to render.
+     * Default is `null`.
+     */
+  children: PropTypes.node,
+  /*
+    * How to determine when scrolling is enabled
+    * */
+  scrollWhen: PropTypes.oneOf(Object.keys(ScrollWhen)),
+};
+
+Marquee.defaultProps = {
+  speed: 0.04,
+  delay: 3000,
+  direction: 'right',
+  childMargin: 15,
+  children: null,
+  scrollWhen: 'always',
+};
