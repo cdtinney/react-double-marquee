@@ -143,7 +143,11 @@ $ npm run lint
 ### Releasing
 
 Releases are done automatically via Travis CI and [`semantic-release`](https://github.com/semantic-release/semantic-release)
-from the `master` branch.
+upon merges (via Pull Request) to the `master` branch from the `develop` branch.
+
+Release versions are determined by analyzing the commit message since the last tagged release commit. For this reason,
+**pull requests must be REBASED** before merging from `develop` to `master`. Development pull requests to the `develop` branch
+can be squashed.
 
 To verify the repos for release:
 
@@ -156,7 +160,6 @@ To run the release script as a dry-run:
 ```
 $ npm run release
 ```
-
 ## License
 
 MIT

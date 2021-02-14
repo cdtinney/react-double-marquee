@@ -1,4 +1,5 @@
 import babel from 'rollup-plugin-babel';
+import typescript from '@rollup/plugin-typescript';
 import externals from './externals';
 
 const paths = {
@@ -10,6 +11,7 @@ const plugins = () => [
   babel({
     exclude: 'node_modules/**',
   }),
+  typescript(),
 ];
 
 module.exports = [{

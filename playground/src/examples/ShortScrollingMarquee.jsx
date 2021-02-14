@@ -5,7 +5,7 @@ import ExampleCard from '../components/ExampleCard';
 function ShortScrollingMarquee() {
   return (
     <ExampleCard
-      description="Default - Short text scrolls"
+      description="Short text - Always scroll"
       marqueeComponent={(
         <Marquee direction="right">
           Short & Sweet!

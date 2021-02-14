@@ -24,12 +24,13 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height: '100%',
     fontFamily: 'roboto, sans-serif',
     boxSizing: 'border-box',
     backgroundColor: '#EFEFEF',
   },
   examples: {
+    width: '90%',
+    maxWidth: '1200px',
     padding: '20px 15px',
     borderTop: '1px solid rgba(221, 221, 221)',
   },
@@ -54,6 +55,7 @@ function Index({
 Index.propTypes = {
   classes: PropTypes.shape({
     root: PropTypes.string.isRequired,
+    examples: PropTypes.string.isRequired,
   }).isRequired,
 };
 

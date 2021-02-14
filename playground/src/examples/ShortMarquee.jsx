@@ -5,7 +5,7 @@ import ExampleCard from '../components/ExampleCard';
 function ShortMarquee() {
   return (
     <ExampleCard
-      description="Scroll only on overflow"
+      description="Short text - Scroll on overflow"
       marqueeComponent={(
         <Marquee scrollWhen="overflow" delay={0}>
           Short & Sweet!
