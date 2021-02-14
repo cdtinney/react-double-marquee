@@ -9,9 +9,10 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     alignItems: 'center',
+    margin: '1em 0',
   },
   description: {
-    width: '250px',
+    width: '500px',
     padding: '10px 15px',
     color: '#DDDDDD',
     backgroundColor: '#4A5A6A',
@@ -72,6 +73,10 @@ function ExampleCard({
 ExampleCard.propTypes = {
   classes: PropTypes.shape({
     root: PropTypes.string.isRequired,
+    props: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    marqueeOuter: PropTypes.string.isRequired,
+    marqueeInner: PropTypes.string.isRequired,
   }).isRequired,
   description: PropTypes.string.isRequired,
   marqueeComponent: PropTypes.node.isRequired,

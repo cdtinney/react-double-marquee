@@ -7264,10 +7264,11 @@
 	  root: {
 	    display: 'flex',
 	    flexWrap: 'wrap',
-	    alignItems: 'center'
+	    alignItems: 'center',
+	    margin: '1em 0'
 	  },
 	  description: {
-	    width: '250px',
+	    width: '500px',
 	    padding: '10px 15px',
 	    color: '#DDDDDD',
 	    backgroundColor: '#4A5A6A',
@@ -7319,7 +7320,11 @@
 
 	ExampleCard.propTypes = {
 	  classes: propTypes.shape({
-	    root: propTypes.string.isRequired
+	    root: propTypes.string.isRequired,
+	    props: propTypes.string.isRequired,
+	    description: propTypes.string.isRequired,
+	    marqueeOuter: propTypes.string.isRequired,
+	    marqueeInner: propTypes.string.isRequired
 	  }).isRequired,
 	  description: propTypes.string.isRequired,
 	  marqueeComponent: propTypes.node.isRequired
@@ -7328,14 +7333,14 @@
 
 	function DefaultRightMarquee() {
 	  return /*#__PURE__*/react.createElement(ExampleCard$1, {
-	    description: "Default - Right",
+	    description: "Default Text - Right Direction",
 	    marqueeComponent: /*#__PURE__*/react.createElement(Marquee, null, "This is a very long and boring sentence with no meaning whatsoever")
 	  });
 	}
 
 	function DefaultLeftMarquee() {
 	  return /*#__PURE__*/react.createElement(ExampleCard$1, {
-	    description: "Default - Left",
+	    description: "Default Text - Left Direction",
 	    marqueeComponent: /*#__PURE__*/react.createElement(Marquee, {
 	      direction: "left"
 	    }, "This is a very long and boring sentence with no meaning whatsoever")
@@ -7344,7 +7349,7 @@
 
 	function ShortMarquee() {
 	  return /*#__PURE__*/react.createElement(ExampleCard$1, {
-	    description: "Scroll only on overflow",
+	    description: "Short text - Scroll on overflow",
 	    marqueeComponent: /*#__PURE__*/react.createElement(Marquee, {
 	      scrollWhen: "overflow",
 	      delay: 0
@@ -7354,7 +7359,7 @@
 
 	function ShortScrollingMarquee() {
 	  return /*#__PURE__*/react.createElement(ExampleCard$1, {
-	    description: "Default - Short text scrolls",
+	    description: "Short text - Always scroll",
 	    marqueeComponent: /*#__PURE__*/react.createElement(Marquee, {
 	      direction: "right"
 	    }, "Short & Sweet!")
@@ -7397,12 +7402,13 @@
 	    display: 'flex',
 	    flexDirection: 'column',
 	    alignItems: 'center',
-	    height: '100%',
 	    fontFamily: 'roboto, sans-serif',
 	    boxSizing: 'border-box',
 	    backgroundColor: '#EFEFEF'
 	  },
 	  examples: {
+	    width: '90%',
+	    maxWidth: '1200px',
 	    padding: '20px 15px',
 	    borderTop: '1px solid rgba(221, 221, 221)'
 	  }
@@ -7419,7 +7425,8 @@
 
 	Index.propTypes = {
 	  classes: propTypes.shape({
-	    root: propTypes.string.isRequired
+	    root: propTypes.string.isRequired,
+	    examples: propTypes.string.isRequired
 	  }).isRequired
 	};
 	var ComponentWithStyles = injectSheet(styles$2)(Index);
