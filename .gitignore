@@ -33,5 +33,3 @@ dist
 # Test coverage output
 coverage
 
-# Coveralls config only required locally
-.coveralls.yml
