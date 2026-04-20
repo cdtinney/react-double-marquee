@@ -19,7 +19,7 @@ export interface MarqueeProps {
   loop?: number;
 }
 
-const SCROLL_WHEN_THRESHOLD: Record<string, number> = {
+const SCROLL_WHEN_THRESHOLD: Record<'always' | 'overflow', number> = {
   always: 0,
   overflow: 100,
 };
@@ -45,6 +45,11 @@ export default function Marquee({
   const requestIdRef = useRef<number | null>(null);
   const loopCountRef = useRef<number>(0);
   const pausedRef = useRef<boolean>(false);
+
+  // Store current props in a ref so callbacks stay stable
+  const propsRef = useRef({ speed, direction, delay, childMargin, scrollWhen, loop, pauseOnHover });
+  propsRef.current = { speed, direction, delay, childMargin, scrollWhen, loop, pauseOnHover };
+
   const [disableScroll, setDisableScroll] = useState<boolean | undefined>(undefined);
 
   const hasRefs = useCallback((): boolean => {
@@ -60,22 +65,24 @@ export default function Marquee({
   }, [hasRefs]);
 
   const shouldAnimate = useCallback((): boolean => {
+    const { scrollWhen: sw } = propsRef.current;
     return (
       hasRefs() &&
       innerRef.current!.scrollWidth > containerRef.current!.clientWidth &&
-      getMarqueeFillPercent() > SCROLL_WHEN_THRESHOLD[scrollWhen]
+      getMarqueeFillPercent() > SCROLL_WHEN_THRESHOLD[sw]
     );
-  }, [hasRefs, getMarqueeFillPercent, scrollWhen]);
+  }, [hasRefs, getMarqueeFillPercent]);
 
   const getWidthSafely = useCallback((): number => {
     return innerRef.current ? innerRef.current.clientWidth : 0;
   }, []);
 
   const getInitialPosition = useCallback((): number => {
-    return direction === 'right'
-      ? -(getWidthSafely() / 2) - childMargin
-      : -childMargin;
-  }, [direction, childMargin, getWidthSafely]);
+    const { direction: dir, childMargin: cm } = propsRef.current;
+    return dir === 'right'
+      ? -(getWidthSafely() / 2) - cm
+      : -cm;
+  }, [getWidthSafely]);
 
   const updateScrollState = useCallback(() => {
     if (hasRefs()) {
@@ -94,18 +101,20 @@ export default function Marquee({
 
   const updateInnerPosition = useCallback(
     (timeDelta: number) => {
+      const { direction: dir, speed: spd, childMargin: cm } = propsRef.current;
+
       const nextPosX = (() => {
-        if (direction === 'right') {
-          const nextPos = posRef.current + timeDelta * speed;
-          if (nextPos > -childMargin) {
+        if (dir === 'right') {
+          const nextPos = posRef.current + timeDelta * spd;
+          if (nextPos > -cm) {
             loopCountRef.current += 1;
             return getInitialPosition();
           }
           return nextPos;
         }
-        if (direction === 'left') {
-          const nextPos = posRef.current - timeDelta * speed;
-          if (nextPos < -(getWidthSafely() / 2) - childMargin) {
+        if (dir === 'left') {
+          const nextPos = posRef.current - timeDelta * spd;
+          if (nextPos < -(getWidthSafely() / 2) - cm) {
             loopCountRef.current += 1;
             return getInitialPosition();
           }
@@ -120,28 +129,29 @@ export default function Marquee({
         innerRef.current.style.transform = translateXCSS(posRef.current);
       }
     },
-    [direction, speed, childMargin, getWidthSafely, getInitialPosition, shouldAnimate],
+    [getWidthSafely, getInitialPosition, shouldAnimate],
   );
 
-  const tick = useCallback(
-    (time: number) => {
-      if (pausedRef.current || loopCountRef.current >= loop) {
-        requestIdRef.current = window.requestAnimationFrame(tick);
-        return;
-      }
+  // Stable tick function — reads props from ref, never recreated
+  const tickRef = useRef<FrameRequestCallback | null>(null);
+  tickRef.current = (time: number) => {
+    const { loop: maxLoops } = propsRef.current;
 
-      if (lastTickTimeRef.current !== null) {
-        updateInnerPosition(time - lastTickTimeRef.current);
-      }
+    if (pausedRef.current || loopCountRef.current >= maxLoops) {
+      requestIdRef.current = window.requestAnimationFrame(tickRef.current!);
+      return;
+    }
 
-      lastTickTimeRef.current = time;
-      requestIdRef.current = window.requestAnimationFrame(tick);
-      updateScrollState();
-    },
-    [loop, updateInnerPosition, updateScrollState],
-  );
+    if (lastTickTimeRef.current !== null) {
+      updateInnerPosition(time - lastTickTimeRef.current);
+    }
 
-  // Initialize position and start animation
+    lastTickTimeRef.current = time;
+    requestIdRef.current = window.requestAnimationFrame(tickRef.current!);
+    updateScrollState();
+  };
+
+  // Start animation — only restarts on children or delay change
   useEffect(() => {
     posRef.current = getInitialPosition();
     if (shouldAnimate() && innerRef.current) {
@@ -152,7 +162,7 @@ export default function Marquee({
     lastTickTimeRef.current = null;
 
     const timeoutId = setTimeout(() => {
-      requestIdRef.current = window.requestAnimationFrame(tick);
+      requestIdRef.current = window.requestAnimationFrame(tickRef.current!);
     }, delay);
 
     return () => {
@@ -161,20 +171,24 @@ export default function Marquee({
         window.cancelAnimationFrame(requestIdRef.current);
       }
     };
-  }, [children, speed, direction, delay, childMargin, scrollWhen, loop, getInitialPosition, shouldAnimate, updateScrollState, tick]);
+    // Only restart the animation loop when children change (new content)
+    // or delay changes. Other prop changes (speed, direction, etc.) are
+    // picked up on the next tick via propsRef.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [children, delay]);
 
   const handleMouseEnter = useCallback(() => {
-    if (pauseOnHover) {
+    if (propsRef.current.pauseOnHover) {
       pausedRef.current = true;
       lastTickTimeRef.current = null;
     }
-  }, [pauseOnHover]);
+  }, []);
 
   const handleMouseLeave = useCallback(() => {
-    if (pauseOnHover) {
+    if (propsRef.current.pauseOnHover) {
       pausedRef.current = false;
     }
-  }, [pauseOnHover]);
+  }, []);
 
   const showDuplicate = disableScroll !== true;
 
