@@ -7,6 +7,77 @@
     <link rel="icon" href="static/favicon.ico"/>
     <title>react-double-marquee</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <style>
+      html, body, #root { margin: 0; height: 100%; }
+      body { font-family: 'Roboto', sans-serif; }
+      .page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100%;
+        box-sizing: border-box;
+        background-color: #efefef;
+      }
+      .examples {
+        width: 100%;
+        max-width: 900px;
+        padding: 20px 15px;
+        border-top: 1px solid rgba(221, 221, 221, 1);
+        box-sizing: border-box;
+      }
+      .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px;
+      }
+      .header__logo { width: 400px; max-width: 100%; }
+      .header__npm {
+        margin-top: 12px;
+        font-size: 14px;
+        color: #4a5a6a;
+        text-decoration: none;
+        border-bottom: 1px dashed #4a5a6a;
+      }
+      .header__npm:hover { color: #2a3a4a; }
+      .card {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .card__description {
+        width: 250px;
+        padding: 10px 15px;
+        color: #dddddd;
+        background-color: #4a5a6a;
+        box-shadow: 3px 3px 6px rgba(45, 45, 90, 0.35);
+        box-sizing: border-box;
+      }
+      .card__props {
+        margin: 8px 0 0;
+        padding: 8px;
+        background-color: #2a3a4a;
+        color: #c8e4ff;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 12px;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+      .card__marquee-outer {
+        width: 250px;
+        margin: 15px;
+        flex-grow: 1;
+        background-color: #cccccc;
+        border-radius: 2px;
+        box-shadow: 3px 3px 6px rgba(45, 45, 90, 0.35);
+      }
+      .card__marquee-inner {
+        width: 200px;
+        margin: 20px;
+        white-space: nowrap;
+      }
+    </style>
   </head>
   <body>
     <noscript>

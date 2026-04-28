@@ -1,8 +1,7 @@
-import React from 'react';
-import Marquee from '../../../docs/static/lib';
+import Marquee from '../../../src';
 import ExampleCard from '../components/ExampleCard';
 
-function ShortScrollingMarquee() {
+export default function ShortScrollingMarquee() {
   return (
     <ExampleCard
       description="Default - Short text scrolls"
@@ -14,5 +13,3 @@ function ShortScrollingMarquee() {
     />
   );
 }
-
-export default ShortScrollingMarquee;

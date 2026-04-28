@@ -1,8 +1,7 @@
-import React from 'react';
-import Marquee from '../../../docs/static/lib';
+import Marquee from '../../../src';
 import ExampleCard from '../components/ExampleCard';
 
-function ShortMarquee() {
+export default function ShortMarquee() {
   return (
     <ExampleCard
       description="Scroll only on overflow"
@@ -14,5 +13,3 @@ function ShortMarquee() {
     />
   );
 }
-
-export default ShortMarquee;

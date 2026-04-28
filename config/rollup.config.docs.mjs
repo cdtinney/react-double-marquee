@@ -11,7 +11,7 @@ const paths = {
     outputFile: 'docs/static/lib/index.js',
   },
   playground: {
-    input: 'playground/src/index.jsx',
+    input: 'playground/src/index.tsx',
     outputFile: 'docs/static/index.js',
   },
 };
