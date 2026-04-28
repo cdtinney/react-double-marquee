@@ -1,18 +1,15 @@
-import React from 'react';
-import Marquee from '../../../docs/static/lib';
+import Marquee from '../../../src';
 import ExampleCard from '../components/ExampleCard';
 
-function DefaultRightMarquee() {
+export default function DefaultLeftMarquee() {
   return (
     <ExampleCard
-      description="Default - Right"
+      description="Default - Left"
       marqueeComponent={(
-        <Marquee>
+        <Marquee direction="left">
           This is a very long and boring sentence with no meaning whatsoever
         </Marquee>
       )}
     />
   );
 }
-
-export default DefaultRightMarquee;

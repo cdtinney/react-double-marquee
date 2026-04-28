@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useLayoutEffect, useCallback } from 'react';
 
 export interface MarqueeProps {
   /** Animation speed, in pixels per millisecond. Defaults to 0.04. */
@@ -18,11 +18,6 @@ export interface MarqueeProps {
   /** Number of loops before stopping. Defaults to Infinity. */
   loop?: number;
 }
-
-const SCROLL_WHEN_THRESHOLD: Record<'always' | 'overflow', number> = {
-  always: 0,
-  overflow: 100,
-};
 
 function translateXCSS(numPx: number): string {
   return `translateX(${numPx}px)`;
@@ -46,62 +41,40 @@ export default function Marquee({
   const loopCountRef = useRef<number>(0);
   const pausedRef = useRef<boolean>(false);
 
-  // Store current props in a ref so callbacks stay stable
   const propsRef = useRef({ speed, direction, delay, childMargin, scrollWhen, loop, pauseOnHover });
   propsRef.current = { speed, direction, delay, childMargin, scrollWhen, loop, pauseOnHover };
 
-  const [disableScroll, setDisableScroll] = useState<boolean | undefined>(undefined);
+  // tileCount is the number of copies of `children` actually rendered.
+  // For 'always' mode it grows to fill the container; for 'overflow' mode
+  // it is 1 (no overflow) or 2 (overflow).
+  const [tileCount, setTileCount] = useState(2);
+  const tileCountRef = useRef(2);
+  tileCountRef.current = tileCount;
 
   const hasRefs = useCallback((): boolean => {
     return !!(containerRef.current && innerRef.current);
   }, []);
 
-  const getMarqueeFillPercent = useCallback((): number => {
-    if (hasRefs() && containerRef.current!.clientWidth > 0) {
-      const singleChildSize = innerRef.current!.scrollWidth / 2;
-      return (singleChildSize * 100) / containerRef.current!.clientWidth;
-    }
-    return 0;
-  }, [hasRefs]);
+  const getTileWidth = useCallback((): number => {
+    if (!innerRef.current || tileCountRef.current === 0) return 0;
+    return innerRef.current.scrollWidth / tileCountRef.current;
+  }, []);
 
   const shouldAnimate = useCallback((): boolean => {
-    const { scrollWhen: sw } = propsRef.current;
-    return (
-      hasRefs() &&
-      innerRef.current!.scrollWidth > containerRef.current!.clientWidth &&
-      getMarqueeFillPercent() > SCROLL_WHEN_THRESHOLD[sw]
-    );
-  }, [hasRefs, getMarqueeFillPercent]);
-
-  const getWidthSafely = useCallback((): number => {
-    return innerRef.current ? innerRef.current.clientWidth : 0;
-  }, []);
+    if (!hasRefs()) return false;
+    return innerRef.current!.scrollWidth > containerRef.current!.clientWidth;
+  }, [hasRefs]);
 
   const getInitialPosition = useCallback((): number => {
     const { direction: dir, childMargin: cm } = propsRef.current;
-    return dir === 'right'
-      ? -(getWidthSafely() / 2) - cm
-      : -cm;
-  }, [getWidthSafely]);
-
-  const updateScrollState = useCallback(() => {
-    if (hasRefs()) {
-      const shouldDisable = !shouldAnimate();
-      setDisableScroll((prev) => {
-        if (prev !== shouldDisable) {
-          if (shouldDisable && innerRef.current) {
-            innerRef.current.style.transform = translateXCSS(0);
-          }
-          return shouldDisable;
-        }
-        return prev;
-      });
-    }
-  }, [hasRefs, shouldAnimate]);
+    const tileWidth = getTileWidth();
+    return dir === 'right' ? -tileWidth - cm : -cm;
+  }, [getTileWidth]);
 
   const updateInnerPosition = useCallback(
     (timeDelta: number) => {
       const { direction: dir, speed: spd, childMargin: cm } = propsRef.current;
+      const tileWidth = getTileWidth();
 
       const nextPosX = (() => {
         if (dir === 'right') {
@@ -114,7 +87,7 @@ export default function Marquee({
         }
         if (dir === 'left') {
           const nextPos = posRef.current - timeDelta * spd;
-          if (nextPos < -(getWidthSafely() / 2) - cm) {
+          if (nextPos < -tileWidth - cm) {
             loopCountRef.current += 1;
             return getInitialPosition();
           }
@@ -129,8 +102,47 @@ export default function Marquee({
         innerRef.current.style.transform = translateXCSS(posRef.current);
       }
     },
-    [getWidthSafely, getInitialPosition, shouldAnimate],
+    [getTileWidth, getInitialPosition, shouldAnimate],
   );
+
+  // Resets transform when content stops needing to scroll.
+  const syncScrollState = useCallback(() => {
+    if (!hasRefs()) return;
+    if (!shouldAnimate() && innerRef.current) {
+      innerRef.current.style.transform = translateXCSS(0);
+    }
+  }, [hasRefs, shouldAnimate]);
+
+  // Measure container/content and choose how many tiles to render.
+  // Re-runs when content changes or the container is resized.
+  useLayoutEffect(() => {
+    if (!hasRefs()) return;
+
+    const adjust = () => {
+      if (!hasRefs()) return;
+      const { scrollWhen: sw } = propsRef.current;
+      const containerWidth = containerRef.current!.clientWidth;
+      const tileWidth = getTileWidth();
+      if (tileWidth <= 0 || containerWidth <= 0) return;
+
+      const needed = sw === 'overflow'
+        ? (tileWidth > containerWidth ? 2 : 1)
+        : Math.max(2, Math.ceil(containerWidth / tileWidth) + 1);
+
+      if (needed !== tileCountRef.current) {
+        setTileCount(needed);
+      }
+      syncScrollState();
+    };
+
+    adjust();
+
+    if (typeof ResizeObserver === 'undefined') return;
+    const obs = new ResizeObserver(adjust);
+    obs.observe(containerRef.current!);
+    obs.observe(innerRef.current!);
+    return () => obs.disconnect();
+  }, [children, scrollWhen, hasRefs, getTileWidth, syncScrollState]);
 
   // Stable tick function — reads props from ref, never recreated
   const tickRef = useRef<FrameRequestCallback | null>(null);
@@ -148,16 +160,14 @@ export default function Marquee({
 
     lastTickTimeRef.current = time;
     requestIdRef.current = window.requestAnimationFrame(tickRef.current!);
-    updateScrollState();
   };
 
-  // Start animation — only restarts on children or delay change
   useEffect(() => {
     posRef.current = getInitialPosition();
     if (shouldAnimate() && innerRef.current) {
       innerRef.current.style.transform = translateXCSS(posRef.current);
     }
-    updateScrollState();
+    syncScrollState();
     loopCountRef.current = 0;
     lastTickTimeRef.current = null;
 
@@ -171,9 +181,6 @@ export default function Marquee({
         window.cancelAnimationFrame(requestIdRef.current);
       }
     };
-    // Only restart the animation loop when children change (new content)
-    // or delay changes. Other prop changes (speed, direction, etc.) are
-    // picked up on the next tick via propsRef.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [children, delay]);
 
@@ -190,7 +197,9 @@ export default function Marquee({
     }
   }, []);
 
-  const showDuplicate = disableScroll !== true;
+  // When only one tile is rendered (no overflow in 'overflow' mode), drop
+  // margins so the single copy can be centered by parent layout.
+  const tileMargin = tileCount === 1 ? '0' : `0 ${childMargin}px`;
 
   return (
     <div
@@ -199,26 +208,12 @@ export default function Marquee({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div
-        ref={innerRef}
-        style={{ display: 'inline-block' }}
-      >
-        <span
-          style={{
-            margin: disableScroll ? '0' : `0 ${childMargin}px`,
-          }}
-        >
-          {children}
-        </span>
-        {showDuplicate && (
-          <span
-            style={{
-              margin: disableScroll ? '0' : `0 ${childMargin}px`,
-            }}
-          >
+      <div ref={innerRef} style={{ display: 'inline-block' }}>
+        {Array.from({ length: tileCount }).map((_, i) => (
+          <span key={i} style={{ margin: tileMargin }}>
             {children}
           </span>
-        )}
+        ))}
       </div>
     </div>
   );

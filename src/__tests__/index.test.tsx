@@ -64,4 +64,10 @@ describe('Marquee', () => {
     rerender(<Marquee>Second</Marquee>);
     expect(screen.getByText('Second')).toBeInTheDocument();
   });
+
+  it('renders multiple copies of children to enable scrolling', () => {
+    render(<Marquee>Repeat me</Marquee>);
+    // Default behavior renders at least two tiles so the marquee can loop.
+    expect(screen.getAllByText('Repeat me').length).toBeGreaterThanOrEqual(2);
+  });
 });
